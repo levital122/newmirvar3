@@ -100,8 +100,36 @@
 </div>
 </div>
 <div class="lg:w-1/2 relative bg-gray-200">
-<div class="absolute inset-0 grayscale contrast-125" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCiPNkI8ibwBqO0S7intoTGihcZDKtz_Qm5SadPMKceh8dBofOg7n1Rw7hbuki2Vqr9UuRMmq1I6-SejrOKJMp29mC0gxNNUJMrHG84VBdXzCa34JNDXe2NWkK9-yk0YNLOZV-4YcWy-iJ5szS_mpFs5DbTyop8_Jg8M4aUxqIplE_B-FxC7gJDY_tPiZIXRR4uxci02iuuAhBgvG3MUhZ6dcVsa1kkUnxPC_arpA6Sk59A84YzdhxKqS9e1kJhzownDnbhHGoFaZI"); background-size: cover; background-position: center;'></div>
-<div class="absolute inset-0 bg-primary/10 mix-blend-multiply"></div>
+  <div
+    id="hero-carousel"
+    class="relative w-full h-full min-h-[340px] overflow-hidden"
+    role="region"
+    aria-roledescription="carousel"
+    aria-label="Галерея работ"
+    data-images="./картинки/slide-1.png|./картинки/slide-2.png|./картинки/slide-3.png|./картинки/slide-4.png|./картинки/slide-5.png|./картинки/slide-6.png"
+  ></div>
+
+  <!-- overlay: тон + стрелки -->
+  <div class="absolute inset-0 bg-primary/10 mix-blend-multiply pointer-events-none"></div>
+
+  <button
+    type="button"
+    id="hero-prev"
+    class="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/80 hover:bg-white border border-border-color backdrop-blur-sm flex items-center justify-center transition-all shadow-sm"
+    aria-label="Предыдущее изображение"
+  >
+    <span class="material-symbols-outlined text-tech-dark">chevron_left</span>
+  </button>
+  <button
+    type="button"
+    id="hero-next"
+    class="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/80 hover:bg-white border border-border-color backdrop-blur-sm flex items-center justify-center transition-all shadow-sm"
+    aria-label="Следующее изображение"
+  >
+    <span class="material-symbols-outlined text-tech-dark">chevron_right</span>
+  </button>
+
+  <div class="absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-2" id="hero-dots" aria-hidden="true"></div>
 </div>
 </div>
 </section>
@@ -497,4 +525,129 @@
 </footer>
 </div>
 
+<script>
+  (function () {
+    /**
+     * Мини-карусель без зависимостей.
+     * Чтобы поменять изображения: отредактируйте атрибут data-images у блока #hero-carousel.
+     */
+    const root = document.getElementById('hero-carousel');
+    if (!root) return;
+
+    const prevBtn = document.getElementById('hero-prev');
+    const nextBtn = document.getElementById('hero-next');
+    const dotsEl = document.getElementById('hero-dots');
+
+    const raw = (root.getAttribute('data-images') || '').trim();
+    const images = raw
+      .split('|')
+      .map((s) => s.trim())
+      .filter(Boolean);
+
+    if (images.length < 2) {
+      // Если картинка одна — просто покажем её.
+      if (images.length === 1) {
+        const img = document.createElement('img');
+        img.src = images[0];
+        img.alt = 'Изображение';
+        img.className = 'absolute inset-0 w-full h-full object-cover grayscale contrast-125';
+        img.decoding = 'async';
+        img.fetchPriority = 'high';
+        root.appendChild(img);
+      }
+      prevBtn && (prevBtn.style.display = 'none');
+      nextBtn && (nextBtn.style.display = 'none');
+      dotsEl && (dotsEl.style.display = 'none');
+      return;
+    }
+
+    let index = 0;
+    const slides = [];
+    const dots = [];
+
+    root.classList.add('select-none');
+    root.tabIndex = 0;
+
+    // Создаём слайды
+    images.forEach((src, i) => {
+      const img = document.createElement('img');
+      img.src = src;
+      img.alt = 'Фото проекта ' + (i + 1);
+      img.className =
+        'absolute inset-0 w-full h-full object-cover grayscale contrast-125 transition-opacity duration-500 ease-out ' +
+        (i === 0 ? 'opacity-100' : 'opacity-0');
+      img.decoding = 'async';
+      img.loading = i === 0 ? 'eager' : 'lazy';
+      if (i === 0) img.fetchPriority = 'high';
+      root.appendChild(img);
+      slides.push(img);
+
+      if (dotsEl) {
+        const dot = document.createElement('button');
+        dot.type = 'button';
+        dot.className =
+          'w-2.5 h-2.5 rounded-full border border-white/60 transition-all ' +
+          (i === 0 ? 'bg-white' : 'bg-white/30 hover:bg-white/60');
+        dot.addEventListener('click', () => goTo(i));
+        dotsEl.appendChild(dot);
+        dots.push(dot);
+      }
+    });
+
+    function render() {
+      slides.forEach((el, i) => {
+        el.style.opacity = i === index ? '1' : '0';
+      });
+      dots.forEach((el, i) => {
+        el.className =
+          'w-2.5 h-2.5 rounded-full border border-white/60 transition-all ' +
+          (i === index ? 'bg-white' : 'bg-white/30 hover:bg-white/60');
+      });
+    }
+
+    function goTo(next) {
+      index = (next + slides.length) % slides.length;
+      render();
+    }
+
+    function next() {
+      goTo(index + 1);
+    }
+
+    function prev() {
+      goTo(index - 1);
+    }
+
+    prevBtn && prevBtn.addEventListener('click', prev);
+    nextBtn && nextBtn.addEventListener('click', next);
+
+    // Клавиатура
+    root.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        prev();
+      }
+      if (e.key === 'ArrowRight') {
+        e.preventDefault();
+        next();
+      }
+    });
+
+    // Swipe
+    let startX = 0;
+    let tracking = false;
+    root.addEventListener('pointerdown', (e) => {
+      tracking = true;
+      startX = e.clientX;
+      root.setPointerCapture && root.setPointerCapture(e.pointerId);
+    });
+    root.addEventListener('pointerup', (e) => {
+      if (!tracking) return;
+      tracking = false;
+      const dx = e.clientX - startX;
+      if (Math.abs(dx) < 40) return;
+      dx < 0 ? next() : prev();
+    });
+  })();
+</script>
 </body></html>
