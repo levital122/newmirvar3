@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html class="light" lang="ru"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Новый мир — Технологическое оснащение HoReCa</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#007BFF",
+                        "tech-dark": "#1A1D21",
+                        "tech-gray": "#6C757D",
+                        "tech-light": "#F8F9FA",
+                        "border-color": "#E9ECEF"
+                    },
+                    fontFamily: {
+                        "sans": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "none": "0px",
+                        "sm": "2px",
+                        "DEFAULT": "0px"
+                    }
+                },
+            },
+        }
+    </script>
+<style type="text/tailwindcss">
+        @layer base {
+            body { @apply bg-white text-tech-dark antialiased; }
+        }
+        .step-line::after {
+            content: '';
+            position: absolute;
+            top: 1.25rem;
+            left: 2.5rem;
+            width: calc(100% - 2.5rem);
+            height: 2px;
+            background: #E9ECEF;
+            z-index: 0;
+        }
+        .step-item:last-child .step-line::after { display: none; }
+    </style>
+</head>
+<body class="font-sans">
+<div class="relative flex flex-col min-h-screen w-full">
+<header class="sticky top-0 z-50 w-full border-b border-border-color bg-white/95 backdrop-blur-sm">
+<div class="max-w-[1440px] mx-auto px-6 h-20 flex items-center justify-between">
+<div class="flex items-center gap-12">
+<a class="flex items-center gap-2" href="/">
+<div class="w-8 h-8 bg-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-xl">account_tree</span>
+</div>
+<span class="text-xl font-bold tracking-tighter uppercase">Новый мир</span>
+</a>
+<nav class="hidden lg:flex items-center gap-8">
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#about">О нас</a>
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#categories">Категории</a>
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#process">Как работаем</a>
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#faq">FAQ</a>
+</nav>
+</div>
+<div class="flex items-center gap-6">
+<div class="hidden xl:flex flex-col text-right">
+<span class="text-xs text-tech-gray">Бесплатная консультация</span>
+<span class="text-sm font-bold">8 (800) 555-35-35</span>
+</div>
+<button class="bg-primary text-white px-6 py-3 text-xs font-bold uppercase tracking-widest hover:bg-blue-700 transition-all">
+                        Получить расчет
+                    </button>
+</div>
+</div>
+</header>
+<main>
+<section class="relative bg-tech-light border-b border-border-color overflow-hidden">
+<div class="max-w-[1440px] mx-auto flex flex-col lg:flex-row items-stretch min-h-[600px]">
+<div class="lg:w-1/2 p-12 lg:p-24 flex flex-col justify-center gap-8">
+<div class="inline-flex items-center gap-2 px-3 py-1 bg-white border border-border-color w-fit">
+<span class="w-2 h-2 bg-primary animate-pulse"></span>
+<span class="text-[10px] font-bold uppercase tracking-[0.2em] text-tech-gray">Промышленный стандарт 2024</span>
+</div>
+<h1 class="text-5xl lg:text-7xl font-extrabold leading-[1.1] tracking-tight text-tech-dark">
+                            Полное оснащение <span class="text-primary">ресторанов</span> и кафе под ключ
+                        </h1>
+<p class="text-lg text-tech-gray max-w-xl leading-relaxed">
+                            Инженерные решения высшего уровня для HoReCa: от проектирования и подбора оборудования до монтажа и сервисного обслуживания по всей России.
+                        </p>
+<div class="flex flex-wrap gap-4">
+<button class="bg-primary text-white px-10 py-5 text-sm font-bold uppercase tracking-widest hover:shadow-xl transition-all">
+                                Смотреть каталог
+                            </button>
+<button class="bg-white border border-border-color text-tech-dark px-10 py-5 text-sm font-bold uppercase tracking-widest hover:bg-tech-light transition-all">
+                                Оставить заявку
+                            </button>
+</div>
+</div>
+<div class="lg:w-1/2 relative bg-gray-200">
+<div class="absolute inset-0 grayscale contrast-125" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCiPNkI8ibwBqO0S7intoTGihcZDKtz_Qm5SadPMKceh8dBofOg7n1Rw7hbuki2Vqr9UuRMmq1I6-SejrOKJMp29mC0gxNNUJMrHG84VBdXzCa34JNDXe2NWkK9-yk0YNLOZV-4YcWy-iJ5szS_mpFs5DbTyop8_Jg8M4aUxqIplE_B-FxC7gJDY_tPiZIXRR4uxci02iuuAhBgvG3MUhZ6dcVsa1kkUnxPC_arpA6Sk59A84YzdhxKqS9e1kJhzownDnbhHGoFaZI"); background-size: cover; background-position: center;'></div>
+<div class="absolute inset-0 bg-primary/10 mix-blend-multiply"></div>
+</div>
+</div>
+</section>
+<section class="py-24 border-b border-border-color">
+<div class="max-w-[1440px] mx-auto px-6">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-border-color border border-border-color">
+<div class="bg-white p-10 hover:bg-tech-light transition-colors group">
+<span class="material-symbols-outlined text-primary text-4xl mb-6">bolt</span>
+<h3 class="text-lg font-bold mb-3 uppercase tracking-tight">Быстрый старт</h3>
+<p class="text-tech-gray text-sm leading-relaxed">Готовые спецификации и наличие на складе позволяют запустить проект в кратчайшие сроки.</p>
+</div>
+<div class="bg-white p-10 hover:bg-tech-light transition-colors">
+<span class="material-symbols-outlined text-primary text-4xl mb-6">build</span>
+<h3 class="text-lg font-bold mb-3 uppercase tracking-tight">Собственный сервис</h3>
+<p class="text-tech-gray text-sm leading-relaxed">Круглосуточная техническая поддержка и оперативный выезд инженеров в любой регион.</p>
+</div>
+<div class="bg-white p-10 hover:bg-tech-light transition-colors">
+<span class="material-symbols-outlined text-primary text-4xl mb-6">inventory_2</span>
+<h3 class="text-lg font-bold mb-3 uppercase tracking-tight">Широкий ассортимент</h3>
+<p class="text-tech-gray text-sm leading-relaxed">Более 5000 наименований профессионального оборудования от ведущих мировых брендов.</p>
+</div>
+<div class="bg-white p-10 hover:bg-tech-light transition-colors">
+<span class="material-symbols-outlined text-primary text-4xl mb-6">payments</span>
+<h3 class="text-lg font-bold mb-3 uppercase tracking-tight">Выгодная цена</h3>
+<p class="text-tech-gray text-sm leading-relaxed">Прямые контракты с производителями обеспечивают лучшие условия для наших клиентов.</p>
+</div>
+<div class="bg-white p-10 hover:bg-tech-light transition-colors">
+<span class="material-symbols-outlined text-primary text-4xl mb-6">support_agent</span>
+<h3 class="text-lg font-bold mb-3 uppercase tracking-tight">Персональный менеджер</h3>
+<p class="text-tech-gray text-sm leading-relaxed">Индивидуальное сопровождение на всех этапах реализации проекта 24/7.</p>
+</div>
+<div class="bg-white p-10 hover:bg-tech-light transition-colors">
+<span class="material-symbols-outlined text-primary text-4xl mb-6">local_shipping</span>
+<h3 class="text-lg font-bold mb-3 uppercase tracking-tight">Доставка по РФ</h3>
+<p class="text-tech-gray text-sm leading-relaxed">Отлаженная логистика во все регионы России с гарантией сохранности груза.</p>
+</div>
+</div>
+</div>
+</section>
+<section class="py-24 bg-tech-light" id="about">
+<div class="max-w-[1440px] mx-auto px-6">
+<div class="flex flex-col lg:flex-row gap-20 items-center">
+<div class="lg:w-1/2 order-2 lg:order-1">
+<div class="border border-border-color p-4 bg-white shadow-2xl">
+<img alt="Офис Новый Мир" class="w-full h-auto grayscale hover:grayscale-0 transition-all duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDBwhELtEGmW4a8kEDQPlfLtxkqDkSXp5B7RTwSjxJtmDJGb3u9EBTJfgy3SUvK-2-D11StFy_h0XkVeIaX46kjDH4S1q4nQKqQdNRzxfrSKEiSUDmHLI8vZbF9C-QkQy1lX-H4i3W8plL2DGwf6OKrTLlw90Z-22BMZQkbnKXI_pEc88yJKxTRYEVyC_Kl-v4dDUGyrR8bXNkvdFl9iNtkQWyvfFOl7mT2W3JqzjK03h_lH-IfH6WXs8_A4BLOuHwotW66UWvpeco"/>
+</div>
+</div>
+<div class="lg:w-1/2 order-1 lg:order-2 flex flex-col gap-6">
+<span class="text-primary font-bold text-xs uppercase tracking-widest">О компании</span>
+<h2 class="text-4xl font-black uppercase leading-tight">Ваш технологический партнер с 2012 года</h2>
+<p class="text-tech-gray leading-relaxed italic border-l-4 border-primary pl-6">
+                                «Новый мир» — это не просто поставщик оборудования. Мы создаем эффективные рабочие пространства, где технологии помогают вашему бизнесу расти.
+                            </p>
+<p class="text-tech-gray leading-relaxed">
+                                Мы специализируемся на комплексном оснащении объектов питания любого масштаба: от небольших кофеен до крупных производственных комбинатов и гостиничных комплексов. Наша команда включает проектировщиков, технологов и сервисных инженеров высшей квалификации.
+                            </p>
+<div class="grid grid-cols-2 gap-8 mt-4">
+<div>
+<p class="text-3xl font-black text-primary">ISO 9001</p>
+<p class="text-[10px] font-bold uppercase text-tech-gray tracking-tighter">Сертификация качества</p>
+</div>
+<div>
+<p class="text-3xl font-black text-primary">ТОП-10</p>
+<p class="text-[10px] font-bold uppercase text-tech-gray tracking-tighter">В рейтинге поставщиков</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="py-24" id="categories">
+<div class="max-w-[1440px] mx-auto px-6">
+<div class="flex items-end justify-between mb-12">
+<div class="flex flex-col gap-2">
+<span class="text-primary font-bold text-xs uppercase tracking-widest">Каталог решений</span>
+<h2 class="text-4xl font-black uppercase">Оборудование</h2>
+</div>
+<a class="text-sm font-bold uppercase tracking-widest border-b-2 border-primary pb-1" href="#">Весь ассортимент</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+<div class="border border-border-color p-8 flex flex-col h-full group hover:border-primary transition-all">
+<span class="material-symbols-outlined text-4xl text-primary mb-6">mode_fan</span>
+<h3 class="text-xl font-bold uppercase mb-4">Тепловое</h3>
+<p class="text-tech-gray text-sm mb-8 flex-grow">Пароконвектоматы, плиты, печи и жарочные поверхности от ведущих заводов.</p>
+<button class="w-full py-4 text-xs font-bold uppercase tracking-widest border border-tech-dark group-hover:bg-tech-dark group-hover:text-white transition-all">Запросить подбор</button>
+</div>
+<div class="border border-border-color p-8 flex flex-col h-full group hover:border-primary transition-all">
+<span class="material-symbols-outlined text-4xl text-primary mb-6">ac_unit</span>
+<h3 class="text-xl font-bold uppercase mb-4">Холодильное</h3>
+<p class="text-tech-gray text-sm mb-8 flex-grow">Шкафы шоковой заморозки, витрины, камеры и столы с точным контролем температуры.</p>
+<button class="w-full py-4 text-xs font-bold uppercase tracking-widest border border-tech-dark group-hover:bg-tech-dark group-hover:text-white transition-all">Запросить подбор</button>
+</div>
+<div class="border border-border-color p-8 flex flex-col h-full group hover:border-primary transition-all">
+<span class="material-symbols-outlined text-4xl text-primary mb-6">settings_input_component</span>
+<h3 class="text-xl font-bold uppercase mb-4">Электро-механическое</h3>
+<p class="text-tech-gray text-sm mb-8 flex-grow">Овощерезки, миксеры, мясорубки и слайсеры для автоматизации кухни.</p>
+<button class="w-full py-4 text-xs font-bold uppercase tracking-widest border border-tech-dark group-hover:bg-tech-dark group-hover:text-white transition-all">Запросить подбор</button>
+</div>
+<div class="border border-border-color p-8 flex flex-col h-full group hover:border-primary transition-all">
+<span class="material-symbols-outlined text-4xl text-primary mb-6">table_chart</span>
+<h3 class="text-xl font-bold uppercase mb-4">Нейтральное</h3>
+<p class="text-tech-gray text-sm mb-8 flex-grow">Столы, мойки, стеллажи и вытяжные зонты из нержавеющей стали AISI 304.</p>
+<button class="w-full py-4 text-xs font-bold uppercase tracking-widest border border-tech-dark group-hover:bg-tech-dark group-hover:text-white transition-all">Запросить подбор</button>
+</div>
+</div>
+</div>
+</section>
+<section class="py-24 bg-tech-dark text-white" id="process">
+<div class="max-w-[1440px] mx-auto px-6">
+<h2 class="text-4xl font-black uppercase mb-20 text-center">Этапы реализации проекта</h2>
+<div class="relative flex flex-col lg:flex-row justify-between gap-12 lg:gap-0">
+<div class="flex-1 relative step-item">
+<div class="relative z-10 step-line">
+<div class="w-10 h-10 bg-primary flex items-center justify-center font-black mb-6">01</div>
+<h4 class="text-lg font-bold uppercase mb-2">Брифинг</h4>
+<p class="text-tech-gray text-xs leading-relaxed max-w-[200px]">Сбор требований и технологическое проектирование.</p>
+</div>
+</div>
+<div class="flex-1 relative step-item">
+<div class="relative z-10 step-line">
+<div class="w-10 h-10 bg-primary flex items-center justify-center font-black mb-6">02</div>
+<h4 class="text-lg font-bold uppercase mb-2">Подбор</h4>
+<p class="text-tech-gray text-xs leading-relaxed max-w-[200px]">Выбор оптимального оборудования под бюджет.</p>
+</div>
+</div>
+<div class="flex-1 relative step-item">
+<div class="relative z-10 step-line">
+<div class="w-10 h-10 bg-primary flex items-center justify-center font-black mb-6">03</div>
+<h4 class="text-lg font-bold uppercase mb-2">Смета</h4>
+<p class="text-tech-gray text-xs leading-relaxed max-w-[200px]">Финальное согласование стоимости и сроков.</p>
+</div>
+</div>
+<div class="flex-1 relative step-item">
+<div class="relative z-10 step-line">
+<div class="w-10 h-10 bg-primary flex items-center justify-center font-black mb-6">04</div>
+<h4 class="text-lg font-bold uppercase mb-2">Поставка</h4>
+<p class="text-tech-gray text-xs leading-relaxed max-w-[200px]">Логистика и проверка комплектности на объекте.</p>
+</div>
+</div>
+<div class="flex-1 relative step-item">
+<div class="relative z-10 step-line">
+<div class="w-10 h-10 bg-primary flex items-center justify-center font-black mb-6">05</div>
+<h4 class="text-lg font-bold uppercase mb-2">Монтаж</h4>
+<p class="text-tech-gray text-xs leading-relaxed max-w-[200px]">Пуско-наладка и обучение персонала.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="py-24 bg-white">
+<div class="max-w-[1440px] mx-auto px-6">
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+<div class="flex flex-col gap-12 pr-12 border-r border-border-color">
+<h3 class="text-3xl font-black uppercase tracking-tight">Нам доверяют</h3>
+<div class="flex flex-col gap-8">
+<div>
+<div class="text-5xl font-black text-primary mb-1">12+ лет</div>
+<p class="text-sm font-bold uppercase text-tech-gray">Безупречного опыта</p>
+</div>
+<div>
+<div class="text-5xl font-black text-primary mb-1">1000+</div>
+<p class="text-sm font-bold uppercase text-tech-gray">Реализованных проектов</p>
+</div>
+<div>
+<div class="text-5xl font-black text-primary mb-1">50+</div>
+<p class="text-sm font-bold uppercase text-tech-gray">Партнеров-производителей</p>
+</div>
+</div>
+</div>
+<div class="lg:col-span-2 flex flex-col gap-8">
+<h3 class="text-xl font-bold uppercase border-l-4 border-primary pl-4 mb-4">Кейсы и отзывы</h3>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="border border-border-color p-6 bg-tech-light">
+<div class="text-3xl font-black text-primary mb-4">45 дней</div>
+<p class="text-xs font-bold uppercase mb-4">От идеи до открытия</p>
+<p class="text-sm text-tech-gray italic">"Кейс сетевого ресторана: полностью укомплектовали кухню за полтора месяца."</p>
+</div>
+<div class="border border-border-color p-6 bg-tech-light">
+<div class="text-3xl font-black text-primary mb-4">24 часа</div>
+<p class="text-xs font-bold uppercase mb-4">Время реагирования</p>
+<p class="text-sm text-tech-gray italic">"Сервисная служба выехала и устранила поломку холодильника в рекордные сроки."</p>
+</div>
+<div class="border border-border-color p-6 bg-tech-light">
+<div class="text-3xl font-black text-primary mb-4">30%</div>
+<p class="text-xs font-bold uppercase mb-4">Экономия бюджета</p>
+<p class="text-sm text-tech-gray italic">"За счет прямой поставки с завода снизили затраты заказчика на закупку плит."</p>
+</div>
+</div>
+<div class="mt-4 p-8 border border-border-color relative">
+<span class="material-symbols-outlined absolute top-4 right-4 text-primary opacity-20 text-6xl">format_quote</span>
+<p class="text-lg leading-relaxed mb-6 italic">"Выражаем благодарность компании 'Новый мир' за профессионализм при оснащении нашей сети кофеен. Все оборудование было поставлено в срок, монтаж выполнен качественно."</p>
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-gray-300 rounded-full"></div>
+<div>
+<p class="text-sm font-bold uppercase">Алексей Смирнов</p>
+<p class="text-xs text-tech-gray">Управляющий директор 'Prime Food'</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="py-24 bg-tech-light" id="faq">
+<div class="max-w-[800px] mx-auto px-6">
+<h2 class="text-4xl font-black uppercase mb-12 text-center">Часто задаваемые вопросы</h2>
+<div class="flex flex-col gap-4">
+<div class="bg-white border border-border-color">
+<button class="w-full flex items-center justify-between p-6 text-left hover:bg-gray-50 transition-colors">
+<span class="font-bold uppercase text-sm tracking-tight">Предоставляете ли вы гарантию на монтаж?</span>
+<span class="material-symbols-outlined text-primary">expand_more</span>
+</button>
+<div class="px-6 pb-6 text-sm text-tech-gray leading-relaxed border-t border-border-color pt-4">
+                                Да, на все монтажные работы мы предоставляем расширенную гарантию 12 месяцев, помимо заводской гарантии на оборудование.
+                            </div>
+</div>
+<div class="bg-white border border-border-color">
+<button class="w-full flex items-center justify-between p-6 text-left hover:bg-gray-50 transition-colors">
+<span class="font-bold uppercase text-sm tracking-tight">Возможно ли приобрести оборудование в лизинг?</span>
+<span class="material-symbols-outlined text-primary">expand_more</span>
+</button>
+</div>
+<div class="bg-white border border-border-color">
+<button class="w-full flex items-center justify-between p-6 text-left hover:bg-gray-50 transition-colors">
+<span class="font-bold uppercase text-sm tracking-tight">Работаете ли вы с НДС?</span>
+<span class="material-symbols-outlined text-primary">expand_more</span>
+</button>
+</div>
+<div class="bg-white border border-border-color">
+<button class="w-full flex items-center justify-between p-6 text-left hover:bg-gray-50 transition-colors">
+<span class="font-bold uppercase text-sm tracking-tight">Какие сроки поставки оборудования в регионы?</span>
+<span class="material-symbols-outlined text-primary">expand_more</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<section class="flex flex-col lg:flex-row bg-white">
+<div class="lg:w-1/2 p-12 lg:p-24 bg-tech-light border-r border-border-color">
+<div class="max-w-md mx-auto flex flex-col gap-10">
+<div class="flex flex-col gap-2">
+<span class="text-primary font-bold text-xs uppercase tracking-widest">Контакты</span>
+<h2 class="text-4xl font-black uppercase">Свяжитесь с нами</h2>
+</div>
+<div class="flex flex-col gap-6">
+<div class="flex gap-6">
+<div class="w-12 h-12 bg-white border border-border-color flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-primary">location_on</span>
+</div>
+<div>
+<p class="text-xs font-bold uppercase text-tech-gray mb-1">Адрес офиса</p>
+<p class="text-sm font-medium">г. Москва, ул. Промышленная, д. 12, офис 404</p>
+</div>
+</div>
+<div class="flex gap-6">
+<div class="w-12 h-12 bg-white border border-border-color flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-primary">call</span>
+</div>
+<div>
+<p class="text-xs font-bold uppercase text-tech-gray mb-1">Телефон</p>
+<p class="text-sm font-medium">8 (800) 555-35-35</p>
+</div>
+</div>
+<div class="flex gap-6">
+<div class="w-12 h-12 bg-white border border-border-color flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-primary">mail</span>
+</div>
+<div>
+<p class="text-xs font-bold uppercase text-tech-gray mb-1">Email</p>
+<p class="text-sm font-medium">info@novmir-horeca.ru</p>
+</div>
+</div>
+<div class="flex gap-6">
+<div class="w-12 h-12 bg-white border border-border-color flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-primary">schedule</span>
+</div>
+<div>
+<p class="text-xs font-bold uppercase text-tech-gray mb-1">SLA / Режим работы</p>
+<p class="text-sm font-medium">Пн-Пт: 09:00 – 18:00. Техподдержка: 24/7</p>
+</div>
+</div>
+</div>
+<div class="w-full h-48 bg-gray-300 relative">
+<div class="absolute inset-0 grayscale opacity-70" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDBwhELtEGmW4a8kEDQPlfLtxkqDkSXp5B7RTwSjxJtmDJGb3u9EBTJfgy3SUvK-2-D11StFy_h0XkVeIaX46kjDH4S1q4nQKqQdNRzxfrSKEiSUDmHLI8vZbF9C-QkQy1lX-H4i3W8plL2DGwf6OKrTLlw90Z-22BMZQkbnKXI_pEc88yJKxTRYEVyC_Kl-v4dDUGyrR8bXNkvdFl9iNtkQWyvfFOl7mT2W3JqzjK03h_lH-IfH6WXs8_A4BLOuHwotW66UWvpeco"); background-size: cover;'></div>
+<div class="absolute inset-0 flex items-center justify-center">
+<span class="bg-white px-4 py-2 text-[10px] font-bold uppercase border border-border-color shadow-sm tracking-widest">Карта проезда</span>
+</div>
+</div>
+</div>
+</div>
+<div class="lg:w-1/2 p-12 lg:p-24 bg-white">
+<div class="max-w-md mx-auto">
+<h3 class="text-2xl font-black uppercase mb-8">Оставить заявку на проект</h3>
+<form class="flex flex-col gap-6">
+<div>
+<label class="block text-[10px] font-bold uppercase tracking-widest text-tech-gray mb-2">Имя заказчика</label>
+<input class="w-full border-b-2 border-border-color border-t-0 border-x-0 focus:border-primary focus:ring-0 px-0 py-3 text-sm placeholder:text-gray-300" placeholder="Иван Иванов" type="text"/>
+</div>
+<div>
+<label class="block text-[10px] font-bold uppercase tracking-widest text-tech-gray mb-2">Компания</label>
+<input class="w-full border-b-2 border-border-color border-t-0 border-x-0 focus:border-primary focus:ring-0 px-0 py-3 text-sm placeholder:text-gray-300" placeholder="ООО Название" type="text"/>
+</div>
+<div class="grid grid-cols-2 gap-6">
+<div>
+<label class="block text-[10px] font-bold uppercase tracking-widest text-tech-gray mb-2">Телефон</label>
+<input class="w-full border-b-2 border-border-color border-t-0 border-x-0 focus:border-primary focus:ring-0 px-0 py-3 text-sm placeholder:text-gray-300" placeholder="+7 (___) ___ __ __" type="tel"/>
+</div>
+<div>
+<label class="block text-[10px] font-bold uppercase tracking-widest text-tech-gray mb-2">E-mail</label>
+<input class="w-full border-b-2 border-border-color border-t-0 border-x-0 focus:border-primary focus:ring-0 px-0 py-3 text-sm placeholder:text-gray-300" placeholder="mail@example.ru" type="email"/>
+</div>
+</div>
+<div>
+<label class="block text-[10px] font-bold uppercase tracking-widest text-tech-gray mb-2">Тип проекта</label>
+<select class="w-full border-b-2 border-border-color border-t-0 border-x-0 focus:border-primary focus:ring-0 px-0 py-3 text-sm">
+<option>Полное оснащение под ключ</option>
+<option>Дозакупка оборудования</option>
+<option>Проектирование и дизайн</option>
+<option>Сервисное обслуживание</option>
+</select>
+</div>
+<div>
+<label class="block text-[10px] font-bold uppercase tracking-widest text-tech-gray mb-2">Краткое описание задачи</label>
+<textarea class="w-full border-b-2 border-border-color border-t-0 border-x-0 focus:border-primary focus:ring-0 px-0 py-3 text-sm placeholder:text-gray-300" placeholder="Укажите количество мест, площадь, формат заведения..." rows="3"></textarea>
+</div>
+<button class="bg-primary text-white py-5 text-sm font-bold uppercase tracking-widest hover:bg-blue-700 transition-all shadow-lg mt-4">
+                                Отправить данные
+                            </button>
+<p class="text-[10px] text-tech-gray leading-tight">Нажимая кнопку, вы соглашаетесь с Политикой конфиденциальности и обработки персональных данных.</p>
+</form>
+</div>
+</div>
+</section>
+</main>
+<footer class="bg-tech-dark text-white py-20 border-t border-white/5">
+<div class="max-w-[1440px] mx-auto px-6">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16">
+<div class="flex flex-col gap-6">
+<a class="flex items-center gap-2" href="/">
+<div class="w-6 h-6 bg-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-base">account_tree</span>
+</div>
+<span class="text-lg font-bold tracking-tighter uppercase">Новый мир</span>
+</a>
+<p class="text-tech-gray text-xs leading-relaxed max-w-xs">
+                            Профессиональное инженерное бюро и поставщик оборудования для сегмента HoReCa. Решения любой сложности с гарантией результата.
+                        </p>
+<div class="flex gap-4">
+<div class="w-8 h-8 border border-white/10 flex items-center justify-center hover:bg-primary transition-colors cursor-pointer">
+<span class="material-symbols-outlined text-sm">share</span>
+</div>
+<div class="w-8 h-8 border border-white/10 flex items-center justify-center hover:bg-primary transition-colors cursor-pointer">
+<span class="material-symbols-outlined text-sm">rss_feed</span>
+</div>
+</div>
+</div>
+<div>
+<h5 class="text-xs font-bold uppercase tracking-widest mb-8 text-primary">Навигация</h5>
+<ul class="flex flex-col gap-4 text-xs font-medium text-tech-gray">
+<li><a class="hover:text-white transition-colors" href="#">О компании</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Наши услуги</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Портфолио проектов</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Сервисный центр</a></li>
+</ul>
+</div>
+<div>
+<h5 class="text-xs font-bold uppercase tracking-widest mb-8 text-primary">Каталог</h5>
+<ul class="flex flex-col gap-4 text-xs font-medium text-tech-gray">
+<li><a class="hover:text-white transition-colors" href="#">Тепловое оборудование</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Холодильные системы</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Нейтральное оборудование</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Барное оборудование</a></li>
+</ul>
+</div>
+<div>
+<h5 class="text-xs font-bold uppercase tracking-widest mb-8 text-primary">Документация</h5>
+<ul class="flex flex-col gap-4 text-xs font-medium text-tech-gray">
+<li><a class="hover:text-white transition-colors" href="#">Лицензии и сертификаты</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Политика конфиденциальности</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Карточка предприятия</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Договор оферты</a></li>
+</ul>
+</div>
+</div>
+<div class="mt-20 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4">
+<p class="text-[10px] text-tech-gray uppercase tracking-widest">© 2012-2024 ООО «Новый мир». Все права защищены.</p>
+<div class="flex gap-8">
+<span class="text-[10px] text-tech-gray uppercase tracking-widest cursor-pointer hover:text-white">Тех. поддержка</span>
+<span class="text-[10px] text-tech-gray uppercase tracking-widest cursor-pointer hover:text-white">Карта сайта</span>
+</div>
+</div>
+</div>
+</footer>
+</div>
+
+</body></html>
