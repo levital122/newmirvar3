@@ -35,16 +35,8 @@
             body { @apply bg-white text-tech-dark antialiased; }
         }
         .step-line::after {
-            content: '';
-            position: absolute;
-            top: 1.25rem;
-            left: 2.5rem;
-            width: calc(100% - 2.5rem);
-            height: 2px;
-            background: #E9ECEF;
-            z-index: 0;
+            display: none;
         }
-        .step-item:last-child .step-line::after { display: none; }
     </style>
 </head>
 <body class="font-sans">
@@ -286,37 +278,47 @@
 <div class="max-w-[1440px] mx-auto px-6">
 <h2 class="text-4xl font-black uppercase mb-20 text-center">Этапы реализации проекта</h2>
 <div class="relative flex flex-col lg:flex-row justify-between gap-12 lg:gap-0">
-<div class="flex-1 relative step-item">
+<div class="flex-1 relative step-item text-center">
 <div class="relative z-10 step-line">
-<div class="w-10 h-10 bg-primary flex items-center justify-center font-black mb-6">01</div>
+<div class="w-12 h-12 bg-primary text-white flex items-center justify-center mb-6 rounded-full mx-auto shadow">
+  <span class="material-symbols-outlined text-xl">assignment</span>
+</div>
 <h4 class="text-lg font-bold uppercase mb-2">Брифинг</h4>
 <p class="text-tech-gray text-xs leading-relaxed max-w-[200px]">Сбор требований и технологическое проектирование.</p>
 </div>
 </div>
-<div class="flex-1 relative step-item">
+<div class="flex-1 relative step-item text-center">
 <div class="relative z-10 step-line">
-<div class="w-10 h-10 bg-primary flex items-center justify-center font-black mb-6">02</div>
+<div class="w-12 h-12 bg-primary text-white flex items-center justify-center mb-6 rounded-full mx-auto shadow">
+  <span class="material-symbols-outlined text-xl">tune</span>
+</div>
 <h4 class="text-lg font-bold uppercase mb-2">Подбор</h4>
 <p class="text-tech-gray text-xs leading-relaxed max-w-[200px]">Выбор оптимального оборудования под бюджет.</p>
 </div>
 </div>
-<div class="flex-1 relative step-item">
+<div class="flex-1 relative step-item text-center">
 <div class="relative z-10 step-line">
-<div class="w-10 h-10 bg-primary flex items-center justify-center font-black mb-6">03</div>
+<div class="w-12 h-12 bg-primary text-white flex items-center justify-center mb-6 rounded-full mx-auto shadow">
+  <span class="material-symbols-outlined text-xl">checklist</span>
+</div>
 <h4 class="text-lg font-bold uppercase mb-2">Смета</h4>
 <p class="text-tech-gray text-xs leading-relaxed max-w-[200px]">Финальное согласование стоимости и сроков.</p>
 </div>
 </div>
-<div class="flex-1 relative step-item">
+<div class="flex-1 relative step-item text-center">
 <div class="relative z-10 step-line">
-<div class="w-10 h-10 bg-primary flex items-center justify-center font-black mb-6">04</div>
+<div class="w-12 h-12 bg-primary text-white flex items-center justify-center mb-6 rounded-full mx-auto shadow">
+  <span class="material-symbols-outlined text-xl">local_shipping</span>
+</div>
 <h4 class="text-lg font-bold uppercase mb-2">Поставка</h4>
 <p class="text-tech-gray text-xs leading-relaxed max-w-[200px]">Логистика и проверка комплектности на объекте.</p>
 </div>
 </div>
-<div class="flex-1 relative step-item">
+<div class="flex-1 relative step-item text-center">
 <div class="relative z-10 step-line">
-<div class="w-10 h-10 bg-primary flex items-center justify-center font-black mb-6">05</div>
+<div class="w-12 h-12 bg-primary text-white flex items-center justify-center mb-6 rounded-full mx-auto shadow">
+  <span class="material-symbols-outlined text-xl">handyman</span>
+</div>
 <h4 class="text-lg font-bold uppercase mb-2">Монтаж</h4>
 <p class="text-tech-gray text-xs leading-relaxed max-w-[200px]">Пуско-наладка и обучение персонала.</p>
 </div>
@@ -369,7 +371,7 @@
 <div class="flex items-center gap-4">
 <div class="w-12 h-12 bg-gray-300 rounded-full"></div>
 <div>
-<p class="text-sm font-bold uppercase">Алексей Смирнов</p>
+<p class="text-sm font-bold uppercase">Давид Погосян</p>
 <p class="text-xs text-tech-gray">Управляющий директор 'Prime Food'</p>
 </div>
 </div>
