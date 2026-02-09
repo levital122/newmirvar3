@@ -88,6 +88,32 @@
             opacity: 1;
             transform: translateY(0) scale(1);
         }
+        .masonry-item img {
+            cursor: zoom-in;
+        }
+        .gallery-lightbox {
+            position: fixed;
+            inset: 0;
+            z-index: 80;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 1.25rem;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(2px);
+        }
+        .gallery-lightbox.is-open {
+            display: flex;
+        }
+        .gallery-lightbox__img {
+            max-width: min(1200px, 95vw);
+            max-height: 90vh;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45);
+            background: #fff;
+        }
     </style>
 </head>
 <body class="font-sans">
@@ -331,19 +357,19 @@
 <div class="flex flex-col gap-2 mb-12">
 <span class="text-primary font-bold text-xs uppercase tracking-widest">Наши проекты</span>
 <h2 class="text-4xl font-black uppercase">Галерея</h2>
-<p class="text-tech-gray max-w-2xl">Анимированная masonry-галерея: карточки плавно появляются сверху при прокрутке.</p>
 </div>
 <div class="masonry-grid" id="masonry-gallery">
-<figure class="masonry-item bg-white border border-border-color p-2 shadow-sm" style="transition-delay: 0ms;"><img class="w-full h-auto object-cover" src="./картинки/slide-1.png" alt="Проект 1" loading="lazy" decoding="async"/></figure>
-<figure class="masonry-item bg-white border border-border-color p-2 shadow-sm" style="transition-delay: 80ms;"><img class="w-full h-auto object-cover" src="./картинки/тепловое.jpg" alt="Тепловое оборудование" loading="lazy" decoding="async"/></figure>
-<figure class="masonry-item bg-white border border-border-color p-2 shadow-sm" style="transition-delay: 160ms;"><img class="w-full h-auto object-cover" src="./картинки/slide-2.png" alt="Проект 2" loading="lazy" decoding="async"/></figure>
-<figure class="masonry-item bg-white border border-border-color p-2 shadow-sm" style="transition-delay: 240ms;"><img class="w-full h-auto object-cover" src="./картинки/холодильное.jpg" alt="Холодильное оборудование" loading="lazy" decoding="async"/></figure>
-<figure class="masonry-item bg-white border border-border-color p-2 shadow-sm" style="transition-delay: 320ms;"><img class="w-full h-auto object-cover" src="./картинки/slide-3.png" alt="Проект 3" loading="lazy" decoding="async"/></figure>
-<figure class="masonry-item bg-white border border-border-color p-2 shadow-sm" style="transition-delay: 400ms;"><img class="w-full h-auto object-cover" src="./картинки/электромеханическое.jpg" alt="Электромеханическое оборудование" loading="lazy" decoding="async"/></figure>
-<figure class="masonry-item bg-white border border-border-color p-2 shadow-sm" style="transition-delay: 480ms;"><img class="w-full h-auto object-cover" src="./картинки/slide-4.png" alt="Проект 4" loading="lazy" decoding="async"/></figure>
-<figure class="masonry-item bg-white border border-border-color p-2 shadow-sm" style="transition-delay: 560ms;"><img class="w-full h-auto object-cover" src="./картинки/нейтральное.jpg" alt="Нейтральное оборудование" loading="lazy" decoding="async"/></figure>
-<figure class="masonry-item bg-white border border-border-color p-2 shadow-sm" style="transition-delay: 640ms;"><img class="w-full h-auto object-cover" src="./картинки/slide-5.png" alt="Проект 5" loading="lazy" decoding="async"/></figure>
-<figure class="masonry-item bg-white border border-border-color p-2 shadow-sm" style="transition-delay: 720ms;"><img class="w-full h-auto object-cover" src="./картинки/slide-6.png" alt="Проект 6" loading="lazy" decoding="async"/></figure>
+<figure class="masonry-item bg-white border border-border-color p-2 shadow-sm" style="transition-delay: 0ms;"><img class="w-full h-auto object-cover" src="./картинки/Апастово от музаферова/photo_2026-02-09 10.31.30.jpeg" alt="Апастово — проект 1" loading="lazy" decoding="async"/></figure>
+<figure class="masonry-item bg-white border border-border-color p-2 shadow-sm" style="transition-delay: 80ms;"><img class="w-full h-auto object-cover" src="./картинки/Апастово от музаферова/photo_2026-02-09 10.32.11.jpeg" alt="Апастово — проект 2" loading="lazy" decoding="async"/></figure>
+<figure class="masonry-item bg-white border border-border-color p-2 shadow-sm" style="transition-delay: 160ms;"><img class="w-full h-auto object-cover" src="./картинки/Апастово от музаферова/photo_2026-02-09 10.32.15.jpeg" alt="Апастово — проект 3" loading="lazy" decoding="async"/></figure>
+<figure class="masonry-item bg-white border border-border-color p-2 shadow-sm" style="transition-delay: 240ms;"><img class="w-full h-auto object-cover" src="./картинки/Апастово от музаферова/photo_2026-02-09 10.32.19.jpeg" alt="Апастово — проект 4" loading="lazy" decoding="async"/></figure>
+<figure class="masonry-item bg-white border border-border-color p-2 shadow-sm" style="transition-delay: 320ms;"><img class="w-full h-auto object-cover" src="./картинки/Апастово от музаферова/photo_2026-02-09 10.32.23.jpeg" alt="Апастово — проект 5" loading="lazy" decoding="async"/></figure>
+<figure class="masonry-item bg-white border border-border-color p-2 shadow-sm" style="transition-delay: 400ms;"><img class="w-full h-auto object-cover" src="./картинки/Апастово от музаферова/photo_2026-02-09 10.32.27.jpeg" alt="Апастово — проект 6" loading="lazy" decoding="async"/></figure>
+<figure class="masonry-item bg-white border border-border-color p-2 shadow-sm" style="transition-delay: 480ms;"><img class="w-full h-auto object-cover" src="./картинки/Апастово от музаферова/photo_2026-02-09 10.32.31.jpeg" alt="Апастово — проект 7" loading="lazy" decoding="async"/></figure>
+<figure class="masonry-item bg-white border border-border-color p-2 shadow-sm" style="transition-delay: 560ms;"><img class="w-full h-auto object-cover" src="./картинки/Апастово от музаферова/photo_2026-02-09 10.32.35.jpeg" alt="Апастово — проект 8" loading="lazy" decoding="async"/></figure>
+<figure class="masonry-item bg-white border border-border-color p-2 shadow-sm" style="transition-delay: 640ms;"><img class="w-full h-auto object-cover" src="./картинки/Апастово от музаферова/photo_2026-02-09 10.32.39.jpeg" alt="Апастово — проект 9" loading="lazy" decoding="async"/></figure>
+<figure class="masonry-item bg-white border border-border-color p-2 shadow-sm" style="transition-delay: 720ms;"><img class="w-full h-auto object-cover" src="./картинки/Апастово от музаферова/photo_2026-02-09 10.32.42.jpeg" alt="Апастово — проект 10" loading="lazy" decoding="async"/></figure>
+<figure class="masonry-item bg-white border border-border-color p-2 shadow-sm" style="transition-delay: 800ms;"><img class="w-full h-auto object-cover" src="./картинки/Апастово от музаферова/photo_2026-02-09 10.32.46.jpeg" alt="Апастово — проект 11" loading="lazy" decoding="async"/></figure>
 </div>
 </div>
 </section>
@@ -655,6 +681,10 @@
 </footer>
 </div>
 
+<div id="gallery-lightbox" class="gallery-lightbox" aria-hidden="true" role="dialog" aria-label="Просмотр изображения">
+  <img id="gallery-lightbox-img" class="gallery-lightbox__img" src="" alt="Увеличенное изображение" />
+</div>
+
 <script>
   (function () {
     /**
@@ -851,6 +881,45 @@
     );
 
     steps.forEach((step) => observer.observe(step));
+  })();
+
+  (function () {
+    const gallery = document.getElementById('masonry-gallery');
+    const lightbox = document.getElementById('gallery-lightbox');
+    const lightboxImg = document.getElementById('gallery-lightbox-img');
+    if (!gallery || !lightbox || !lightboxImg) return;
+
+    const images = Array.from(gallery.querySelectorAll('img'));
+    if (!images.length) return;
+
+    function openLightbox(src, alt) {
+      lightboxImg.src = src;
+      lightboxImg.alt = alt || 'Увеличенное изображение';
+      lightbox.classList.add('is-open');
+      lightbox.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove('is-open');
+      lightbox.setAttribute('aria-hidden', 'true');
+      lightboxImg.src = '';
+      document.body.style.overflow = '';
+    }
+
+    images.forEach((img) => {
+      img.addEventListener('click', () => openLightbox(img.currentSrc || img.src, img.alt));
+    });
+
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) closeLightbox();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && lightbox.classList.contains('is-open')) {
+        closeLightbox();
+      }
+    });
   })();
 </script>
 </body></html>
