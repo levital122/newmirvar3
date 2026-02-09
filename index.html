@@ -299,9 +299,11 @@
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
 <div class="border border-border-color p-8 flex flex-col h-full group hover:border-primary transition-all">
 <img
-  class="w-48 h-48 object-cover mb-6 border border-border-color mx-auto"
-  src="./картинки/slide-1.png"
+  id="catalog-thermal-image"
+  class="w-48 h-48 object-cover mb-6 border border-border-color mx-auto transition-opacity duration-500"
+  src="./картинки/Тепловое оборудование/Снимок экрана 2026-02-09 в 13.42.44.png"
   alt="Тепловое оборудование"
+  data-images="./картинки/Тепловое оборудование/Снимок экрана 2026-02-09 в 13.42.44.png|./картинки/Тепловое оборудование/Снимок экрана 2026-02-09 в 13.42.56.png|./картинки/Тепловое оборудование/Снимок экрана 2026-02-09 в 13.43.02.png|./картинки/Тепловое оборудование/Снимок экрана 2026-02-09 в 13.43.09.png|./картинки/Тепловое оборудование/Снимок экрана 2026-02-09 в 13.43.21.png"
 />
 <h3 class="text-xl font-bold uppercase mb-4">Тепловое</h3>
 <p class="text-tech-gray text-sm mb-8 flex-grow">Пароконвектоматы, плиты, печи и жарочные поверхности от ведущих заводов.</p>
@@ -920,6 +922,33 @@
         closeLightbox();
       }
     });
+  })();
+
+  (function () {
+    const img = document.getElementById('catalog-thermal-image');
+    if (!img) return;
+
+    const images = (img.getAttribute('data-images') || '')
+      .split('|')
+      .map((s) => s.trim())
+      .filter(Boolean);
+
+    if (images.length < 2) return;
+
+    let index = 0;
+
+    const show = (next) => {
+      index = (next + images.length) % images.length;
+      img.classList.add('opacity-0');
+      window.setTimeout(() => {
+        img.src = images[index];
+        img.classList.remove('opacity-0');
+      }, 220);
+    };
+
+    window.setInterval(() => {
+      show(index + 1);
+    }, 5000);
   })();
 </script>
 </body></html>
