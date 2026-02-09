@@ -34,8 +34,37 @@
         @layer base {
             body { @apply bg-white text-tech-dark antialiased; }
         }
-        .step-line::after {
-            display: none;
+        .step-line::after { display: none; }
+        .process-step {
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .process-step.is-animated {
+            opacity: 0;
+            transform: translateY(24px);
+        }
+        .process-step.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .process-dot {
+            transition: transform 0.35s ease, background-color 0.35s ease, box-shadow 0.35s ease;
+        }
+        .process-step.is-active .process-dot {
+            transform: scale(1.08);
+            background-color: #007BFF;
+            box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.2);
+        }
+        .process-step.is-active .process-dot .material-symbols-outlined {
+            color: #fff;
+        }
+        .process-card {
+            transition: border-color 0.35s ease, background-color 0.35s ease;
+        }
+        .process-step.is-active .process-card {
+            border-color: rgba(0, 123, 255, 0.55);
+            background-color: rgba(255, 255, 255, 0.04);
         }
         .masonry-grid {
             column-count: 1;
@@ -320,53 +349,60 @@
 </section>
 <section class="py-24 bg-tech-dark text-white" id="process">
 <div class="max-w-[1440px] mx-auto px-6">
-<h2 class="text-4xl font-black uppercase mb-20 text-center">Этапы реализации проекта</h2>
-<div class="relative flex flex-col lg:flex-row justify-between gap-12 lg:gap-0">
-<div class="flex-1 relative step-item text-center">
-<div class="relative z-10 step-line">
-<div class="w-12 h-12 bg-primary text-white flex items-center justify-center mb-6 rounded-full mx-auto shadow">
-  <span class="material-symbols-outlined text-xl">assignment</span>
-</div>
-<h4 class="text-lg font-bold uppercase mb-2">Брифинг</h4>
-<p class="text-tech-gray text-xs leading-relaxed max-w-[200px] mx-auto">Сбор требований и технологическое проектирование.</p>
-</div>
-</div>
-<div class="flex-1 relative step-item text-center">
-<div class="relative z-10 step-line">
-<div class="w-12 h-12 bg-primary text-white flex items-center justify-center mb-6 rounded-full mx-auto shadow">
-  <span class="material-symbols-outlined text-xl">tune</span>
-</div>
-<h4 class="text-lg font-bold uppercase mb-2">Подбор</h4>
-<p class="text-tech-gray text-xs leading-relaxed max-w-[200px] mx-auto">Выбор оптимального оборудования под бюджет.</p>
-</div>
-</div>
-<div class="flex-1 relative step-item text-center">
-<div class="relative z-10 step-line">
-<div class="w-12 h-12 bg-primary text-white flex items-center justify-center mb-6 rounded-full mx-auto shadow">
-  <span class="material-symbols-outlined text-xl">checklist</span>
-</div>
-<h4 class="text-lg font-bold uppercase mb-2">Смета</h4>
-<p class="text-tech-gray text-xs leading-relaxed max-w-[200px] mx-auto">Финальное согласование стоимости и сроков.</p>
-</div>
-</div>
-<div class="flex-1 relative step-item text-center">
-<div class="relative z-10 step-line">
-<div class="w-12 h-12 bg-primary text-white flex items-center justify-center mb-6 rounded-full mx-auto shadow">
-  <span class="material-symbols-outlined text-xl">local_shipping</span>
-</div>
-<h4 class="text-lg font-bold uppercase mb-2">Поставка</h4>
-<p class="text-tech-gray text-xs leading-relaxed max-w-[200px] mx-auto">Логистика и проверка комплектности на объекте.</p>
-</div>
-</div>
-<div class="flex-1 relative step-item text-center">
-<div class="relative z-10 step-line">
-<div class="w-12 h-12 bg-primary text-white flex items-center justify-center mb-6 rounded-full mx-auto shadow">
-  <span class="material-symbols-outlined text-xl">handyman</span>
-</div>
-<h4 class="text-lg font-bold uppercase mb-2">Монтаж</h4>
-<p class="text-tech-gray text-xs leading-relaxed max-w-[200px] mx-auto">Пуско-наладка и обучение персонала.</p>
-</div>
-</div>
+<h2 class="text-4xl font-black uppercase mb-16 text-center">Этапы реализации проекта</h2>
+<div class="relative">
+  <div class="hidden lg:block absolute left-0 right-0 top-8 h-px bg-white/20"></div>
+  <div class="grid grid-cols-1 lg:grid-cols-5 gap-6">
+    <article class="process-step" data-step="0">
+      <div class="process-dot w-14 h-14 rounded-full bg-white/10 border border-white/20 flex items-center justify-center mx-auto mb-5">
+        <span class="material-symbols-outlined text-2xl text-primary">assignment</span>
+      </div>
+      <div class="process-card border border-white/10 p-5 text-center">
+        <h4 class="text-lg font-bold uppercase mb-2">Брифинг</h4>
+        <p class="text-tech-gray text-xs leading-relaxed">Сбор требований и технологическое проектирование.</p>
+      </div>
+    </article>
+
+    <article class="process-step" data-step="1">
+      <div class="process-dot w-14 h-14 rounded-full bg-white/10 border border-white/20 flex items-center justify-center mx-auto mb-5">
+        <span class="material-symbols-outlined text-2xl text-primary">tune</span>
+      </div>
+      <div class="process-card border border-white/10 p-5 text-center">
+        <h4 class="text-lg font-bold uppercase mb-2">Подбор</h4>
+        <p class="text-tech-gray text-xs leading-relaxed">Выбор оптимального оборудования под бюджет.</p>
+      </div>
+    </article>
+
+    <article class="process-step" data-step="2">
+      <div class="process-dot w-14 h-14 rounded-full bg-white/10 border border-white/20 flex items-center justify-center mx-auto mb-5">
+        <span class="material-symbols-outlined text-2xl text-primary">checklist</span>
+      </div>
+      <div class="process-card border border-white/10 p-5 text-center">
+        <h4 class="text-lg font-bold uppercase mb-2">Смета</h4>
+        <p class="text-tech-gray text-xs leading-relaxed">Финальное согласование стоимости и сроков.</p>
+      </div>
+    </article>
+
+    <article class="process-step" data-step="3">
+      <div class="process-dot w-14 h-14 rounded-full bg-white/10 border border-white/20 flex items-center justify-center mx-auto mb-5">
+        <span class="material-symbols-outlined text-2xl text-primary">local_shipping</span>
+      </div>
+      <div class="process-card border border-white/10 p-5 text-center">
+        <h4 class="text-lg font-bold uppercase mb-2">Поставка</h4>
+        <p class="text-tech-gray text-xs leading-relaxed">Логистика и проверка комплектности на объекте.</p>
+      </div>
+    </article>
+
+    <article class="process-step" data-step="4">
+      <div class="process-dot w-14 h-14 rounded-full bg-white/10 border border-white/20 flex items-center justify-center mx-auto mb-5">
+        <span class="material-symbols-outlined text-2xl text-primary">handyman</span>
+      </div>
+      <div class="process-card border border-white/10 p-5 text-center">
+        <h4 class="text-lg font-bold uppercase mb-2">Монтаж</h4>
+        <p class="text-tech-gray text-xs leading-relaxed">Пуско-наладка и обучение персонала.</p>
+      </div>
+    </article>
+  </div>
 </div>
 </div>
 </section>
@@ -772,6 +808,49 @@
     );
 
     items.forEach((item) => observer.observe(item));
+  })();
+
+  (function () {
+    const section = document.getElementById('process');
+    if (!section) return;
+
+    const steps = Array.from(section.querySelectorAll('.process-step'));
+    if (!steps.length) return;
+
+    const activate = (index) => {
+      steps.forEach((step, i) => {
+        step.classList.toggle('is-active', i <= index);
+      });
+    };
+
+    // Прячем шаги только когда JS точно работает,
+    // чтобы без JS/при ошибках блок не исчезал полностью.
+    steps.forEach((step) => step.classList.add('is-animated'));
+
+    if (!('IntersectionObserver' in window)) {
+      steps.forEach((step) => step.classList.add('is-visible', 'is-active'));
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          const index = Number(entry.target.getAttribute('data-step'));
+          window.setTimeout(() => {
+            entry.target.classList.add('is-visible');
+            activate(index);
+          }, index * 120);
+        });
+      },
+      {
+        root: null,
+        threshold: 0.1,
+        rootMargin: '0px 0px -5% 0px',
+      }
+    );
+
+    steps.forEach((step) => observer.observe(step));
   })();
 </script>
 </body></html>
