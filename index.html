@@ -67,18 +67,18 @@
             background-color: rgba(255, 255, 255, 0.04);
         }
         .masonry-grid {
-            column-count: 1;
-            column-gap: 1rem;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
         }
         @media (min-width: 640px) {
-            .masonry-grid { column-count: 2; }
+            .masonry-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
         }
         @media (min-width: 1024px) {
-            .masonry-grid { column-count: 3; }
+            .masonry-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
         }
         .masonry-item {
-            break-inside: avoid;
-            margin-bottom: 1rem;
+            margin-bottom: 0;
             opacity: 0;
             transform: translateY(-24px) scale(0.98);
             transition: opacity 0.7s ease, transform 0.7s ease;
@@ -90,6 +90,10 @@
         }
         .masonry-item img {
             cursor: zoom-in;
+            width: 100%;
+            aspect-ratio: 4 / 5;
+            object-fit: cover;
+            display: block;
         }
         .gallery-lightbox {
             position: fixed;
@@ -314,9 +318,11 @@
 </div>
 <div class="border border-border-color p-8 flex flex-col h-full group hover:border-primary transition-all">
 <img
-  class="w-48 h-48 object-cover mb-6 border border-border-color mx-auto"
-  src="./картинки/slide-2.png"
+  id="catalog-cold-image"
+  class="w-48 h-48 object-cover mb-6 border border-border-color mx-auto transition-opacity duration-500"
+  src="./картинки/Холодильное/Снимок экрана 2026-02-09 в 13.55.58.png"
   alt="Холодильное оборудование"
+  data-images="./картинки/Холодильное/Снимок экрана 2026-02-09 в 13.55.58.png|./картинки/Холодильное/Снимок экрана 2026-02-09 в 13.56.17.png|./картинки/Холодильное/Снимок экрана 2026-02-09 в 13.56.54.png|./картинки/Холодильное/Снимок экрана 2026-02-09 в 13.57.15.png"
 />
 <h3 class="text-xl font-bold uppercase mb-4">Холодильное</h3>
 <p class="text-tech-gray text-sm mb-8 flex-grow">Шкафы шоковой заморозки, витрины, камеры и столы с точным контролем температуры.</p>
@@ -925,30 +931,35 @@
   })();
 
   (function () {
-    const img = document.getElementById('catalog-thermal-image');
-    if (!img) return;
+    function initCatalogAutoSlider(imageId, intervalMs) {
+      const img = document.getElementById(imageId);
+      if (!img) return;
 
-    const images = (img.getAttribute('data-images') || '')
-      .split('|')
-      .map((s) => s.trim())
-      .filter(Boolean);
+      const images = (img.getAttribute('data-images') || '')
+        .split('|')
+        .map((s) => s.trim())
+        .filter(Boolean);
 
-    if (images.length < 2) return;
+      if (images.length < 2) return;
 
-    let index = 0;
+      let index = 0;
 
-    const show = (next) => {
-      index = (next + images.length) % images.length;
-      img.classList.add('opacity-0');
-      window.setTimeout(() => {
-        img.src = images[index];
-        img.classList.remove('opacity-0');
-      }, 220);
-    };
+      const show = (next) => {
+        index = (next + images.length) % images.length;
+        img.classList.add('opacity-0');
+        window.setTimeout(() => {
+          img.src = images[index];
+          img.classList.remove('opacity-0');
+        }, 220);
+      };
 
-    window.setInterval(() => {
-      show(index + 1);
-    }, 5000);
+      window.setInterval(() => {
+        show(index + 1);
+      }, intervalMs);
+    }
+
+    initCatalogAutoSlider('catalog-thermal-image', 5000);
+    initCatalogAutoSlider('catalog-cold-image', 5000);
   })();
 </script>
 </body></html>
