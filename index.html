@@ -118,6 +118,86 @@
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45);
             background: #fff;
         }
+        .hero-steam {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            z-index: 12;
+            opacity: 0;
+            transition: opacity 0.45s ease;
+        }
+        .hero-steam.is-visible {
+            opacity: 1;
+        }
+        .hero-steam__puff {
+            position: absolute;
+            bottom: 56%;
+            width: 92px;
+            height: 92px;
+            border-radius: 9999px;
+            background: radial-gradient(circle, rgba(242, 244, 248, 0.8) 0%, rgba(224, 228, 236, 0.58) 38%, rgba(204, 210, 222, 0.24) 62%, rgba(170, 178, 194, 0) 80%);
+            filter: blur(1px);
+            transform: translate3d(0, 0, 0) scale(0.72);
+            opacity: 0;
+            animation: steam-rise 2.8s ease-in-out infinite;
+        }
+        .hero-steam__puff--1 {
+            left: 58%;
+            animation-delay: 0s;
+        }
+        .hero-steam__puff--2 {
+            left: 62%;
+            width: 92px;
+            height: 92px;
+            animation-delay: 0.6s;
+        }
+        .hero-steam__puff--3 {
+            left: 66%;
+            width: 78px;
+            height: 78px;
+            animation-delay: 1.2s;
+        }
+        .hero-steam__puff--4 {
+            left: 60%;
+            width: 96px;
+            height: 96px;
+            animation-delay: 1.8s;
+        }
+        .hero-steam__puff--5 {
+            left: 64%;
+            width: 72px;
+            height: 72px;
+            animation-delay: 2.4s;
+        }
+        .hero-steam__puff--6 {
+            left: 61%;
+            width: 88px;
+            height: 88px;
+            animation-delay: 0.3s;
+        }
+        .hero-steam__puff--7 {
+            left: 67%;
+            width: 80px;
+            height: 80px;
+            animation-delay: 1.5s;
+        }
+        @keyframes steam-rise {
+            0% {
+                opacity: 0;
+                transform: translate3d(0, 8px, 0) scale(0.72);
+            }
+            20% {
+                opacity: 0.8;
+            }
+            60% {
+                opacity: 0.55;
+                transform: translate3d(6px, -84px, 0) scale(1.04);
+            }
+            100% {
+                opacity: 0;
+                transform: translate3d(-4px, -145px, 0) scale(1.22);
+            }
+        }
     </style>
 </head>
 <body class="font-sans">
@@ -189,7 +269,7 @@
     role="region"
     aria-roledescription="carousel"
     aria-label="Галерея работ"
-    data-images="./картинки/slide-1.png|./картинки/slide-2.png|./картинки/slide-3.png|./картинки/slide-4.png|./картинки/slide-5.png|./картинки/slide-6.png"
+    data-images="./картинки/slide-2.png|./картинки/slide-1.png|./картинки/slide-3.png|./картинки/slide-4.png|./картинки/slide-5.png|./картинки/slide-6.png"
   ></div>
 
   <!-- overlay: тон + стрелки -->
@@ -741,6 +821,19 @@
     root.tabIndex = 0;
 
     // Создаём слайды
+    const steamEl = document.createElement('div');
+    steamEl.className = 'hero-steam';
+    steamEl.setAttribute('aria-hidden', 'true');
+    steamEl.innerHTML =
+      '<span class="hero-steam__puff hero-steam__puff--1"></span>' +
+      '<span class="hero-steam__puff hero-steam__puff--2"></span>' +
+      '<span class="hero-steam__puff hero-steam__puff--3"></span>' +
+      '<span class="hero-steam__puff hero-steam__puff--4"></span>' +
+      '<span class="hero-steam__puff hero-steam__puff--5"></span>' +
+      '<span class="hero-steam__puff hero-steam__puff--6"></span>' +
+      '<span class="hero-steam__puff hero-steam__puff--7"></span>';
+    root.appendChild(steamEl);
+
     images.forEach((src, i) => {
       const img = document.createElement('img');
       img.src = src;
@@ -770,6 +863,7 @@
       slides.forEach((el, i) => {
         el.style.opacity = i === index ? '1' : '0';
       });
+      steamEl.classList.toggle('is-visible', index === 0);
       dots.forEach((el, i) => {
         el.className =
           'w-2.5 h-2.5 rounded-full border border-white/60 transition-all ' +
@@ -792,6 +886,10 @@
 
     prevBtn && prevBtn.addEventListener('click', prev);
     nextBtn && nextBtn.addEventListener('click', next);
+
+    // Первый рендер сразу после инициализации,
+    // чтобы пар был виден на стартовом слайде без перелистывания.
+    render();
 
     // Клавиатура
     root.addEventListener('keydown', (e) => {
