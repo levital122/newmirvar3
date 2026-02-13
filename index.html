@@ -66,6 +66,114 @@
             border-color: rgba(0, 123, 255, 0.55);
             background-color: rgba(255, 255, 255, 0.04);
         }
+        .process-mini-anim {
+            width: 140px;
+            height: 72px;
+            margin: 0 auto 0.9rem;
+            position: relative;
+            opacity: 0.92;
+            overflow: hidden;
+        }
+        .process-mini-anim svg {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+        .process-mini-anim__line {
+            fill: none;
+            stroke: rgba(255, 255, 255, 0.85);
+            stroke-width: 2.2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            stroke-dasharray: 180;
+            stroke-dashoffset: 180;
+            animation: plan-draw 3.8s ease-in-out infinite;
+        }
+        .process-mini-anim__line--2 {
+            animation-delay: 0.35s;
+        }
+        .process-mini-anim__line--3 {
+            animation-delay: 0.7s;
+        }
+        .process-mini-anim__pencil {
+            fill: #fff;
+            filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.2));
+            animation: pencil-move 3.8s ease-in-out infinite;
+            transform-origin: center;
+        }
+        .process-mini-anim__shape {
+            fill: none;
+            stroke: rgba(255, 255, 255, 0.86);
+            stroke-width: 2.2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+        .process-mini-anim__fill {
+            fill: rgba(255, 255, 255, 0.22);
+            transform-origin: left center;
+            animation: bar-grow 2.8s ease-in-out infinite;
+        }
+        .process-mini-anim__gear {
+            transform-origin: 40px 36px;
+            animation: gear-spin 4.2s linear infinite;
+        }
+        .process-mini-anim__dot {
+            fill: rgba(255, 255, 255, 0.9);
+            animation: dot-pulse 1.8s ease-in-out infinite;
+        }
+        .process-mini-anim__truck {
+            animation: truck-drive 4.2s ease-in-out infinite;
+        }
+        .process-mini-anim__wrench {
+            transform-origin: 68px 38px;
+            animation: wrench-swing 3.2s ease-in-out infinite;
+        }
+        @keyframes plan-draw {
+            0%, 10% { stroke-dashoffset: 180; opacity: 0; }
+            20% { opacity: 1; }
+            55% { stroke-dashoffset: 0; opacity: 1; }
+            85% { stroke-dashoffset: 0; opacity: 0.9; }
+            100% { stroke-dashoffset: 180; opacity: 0; }
+        }
+        @keyframes gear-spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        @keyframes bar-grow {
+            0%, 100% { transform: scaleX(0.18); opacity: 0.35; }
+            45% { transform: scaleX(0.9); opacity: 0.9; }
+            75% { transform: scaleX(0.6); opacity: 0.6; }
+        }
+        @keyframes dot-pulse {
+            0%, 100% { opacity: 0.35; }
+            50% { opacity: 1; }
+        }
+        @keyframes truck-drive {
+            0% { transform: translateX(8px); opacity: 0; }
+            18% { opacity: 1; }
+            52% { transform: translateX(36px); opacity: 1; }
+            86% { transform: translateX(70px); opacity: 1; }
+            100% { transform: translateX(86px); opacity: 0; }
+        }
+        @keyframes pencil-move {
+            0% { transform: translate(8px, 30px) rotate(-12deg); opacity: 0; }
+            18% { opacity: 1; }
+            34% { transform: translate(48px, 18px) rotate(-6deg); }
+            52% { transform: translate(95px, 28px) rotate(10deg); }
+            72% { transform: translate(55px, 45px) rotate(-2deg); }
+            88% { opacity: 1; }
+            100% { transform: translate(8px, 30px) rotate(-12deg); opacity: 0; }
+        }
+        @keyframes wrench-swing {
+            0%, 100% { transform: rotate(-18deg); }
+            50% { transform: rotate(16deg); }
+        }
+        .process-card {
+            min-height: 132px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
         .masonry-grid {
             display: grid;
             grid-template-columns: 1fr;
@@ -117,6 +225,70 @@
             object-fit: contain;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45);
             background: #fff;
+        }
+        .partner-marquee {
+            position: relative;
+            overflow: hidden;
+        }
+        .partner-marquee::before,
+        .partner-marquee::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 64px;
+            pointer-events: none;
+            z-index: 2;
+        }
+        .partner-marquee::before {
+            left: 0;
+            background: linear-gradient(to right, #f8f9fa 0%, rgba(248, 249, 250, 0) 100%);
+        }
+        .partner-marquee::after {
+            right: 0;
+            background: linear-gradient(to left, #f8f9fa 0%, rgba(248, 249, 250, 0) 100%);
+        }
+        .partner-marquee__track {
+            --marquee-duration: 44s;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            width: max-content;
+            padding: 0.25rem 0;
+            will-change: transform;
+        }
+        .partner-marquee__track--left {
+            animation: partners-marquee-left var(--marquee-duration) linear infinite;
+        }
+        .partner-marquee__track--right {
+            animation: partners-marquee-right var(--marquee-duration) linear infinite;
+        }
+        .partner-logo {
+            flex: 0 0 auto;
+            width: 170px;
+            height: 88px;
+            background: #fff;
+            border: 1px solid #E9ECEF;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.75rem;
+        }
+        .partner-logo img {
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            display: block;
+        }
+        @keyframes partners-marquee-left {
+            from { transform: translateX(0); }
+            to { transform: translateX(-50%); }
+        }
+        @keyframes partners-marquee-right {
+            from { transform: translateX(-50%); }
+            to { transform: translateX(0); }
         }
         .hero-steam {
             position: absolute;
@@ -339,25 +511,13 @@
 <h2 class="text-4xl font-black uppercase">Наши партнеры</h2>
 <p class="text-tech-gray max-w-3xl">Работаем с проверенными производителями профессионального оборудования и комплектующих для HoReCa.</p>
 </div>
-<div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
-<div class="bg-white border border-border-color p-5 h-28 flex items-center justify-center hover:border-primary transition-colors"><img src="./картинки/бренды лого/1075.jpg" alt="Логотип партнера 1075" class="max-h-16 w-full object-contain" loading="lazy" decoding="async"/></div>
-<div class="bg-white border border-border-color p-5 h-28 flex items-center justify-center hover:border-primary transition-colors"><img src="./картинки/бренды лого/1088.png" alt="Логотип партнера 1088" class="max-h-16 w-full object-contain" loading="lazy" decoding="async"/></div>
-<div class="bg-white border border-border-color p-5 h-28 flex items-center justify-center hover:border-primary transition-colors"><img src="./картинки/бренды лого/1158.jpg" alt="Логотип партнера 1158" class="max-h-16 w-full object-contain" loading="lazy" decoding="async"/></div>
-<div class="bg-white border border-border-color p-5 h-28 flex items-center justify-center hover:border-primary transition-colors"><img src="./картинки/бренды лого/1163.jpg" alt="Логотип партнера 1163" class="max-h-16 w-full object-contain" loading="lazy" decoding="async"/></div>
-<div class="bg-white border border-border-color p-5 h-28 flex items-center justify-center hover:border-primary transition-colors"><img src="./картинки/бренды лого/1228.png" alt="Логотип партнера 1228" class="max-h-16 w-full object-contain" loading="lazy" decoding="async"/></div>
-<div class="bg-white border border-border-color p-5 h-28 flex items-center justify-center hover:border-primary transition-colors"><img src="./картинки/бренды лого/1233.png" alt="Логотип партнера 1233" class="max-h-16 w-full object-contain" loading="lazy" decoding="async"/></div>
-<div class="bg-white border border-border-color p-5 h-28 flex items-center justify-center hover:border-primary transition-colors"><img src="./картинки/бренды лого/1237.png" alt="Логотип партнера 1237" class="max-h-16 w-full object-contain" loading="lazy" decoding="async"/></div>
-<div class="bg-white border border-border-color p-5 h-28 flex items-center justify-center hover:border-primary transition-colors"><img src="./картинки/бренды лого/1241.png" alt="Логотип партнера 1241" class="max-h-16 w-full object-contain" loading="lazy" decoding="async"/></div>
-<div class="bg-white border border-border-color p-5 h-28 flex items-center justify-center hover:border-primary transition-colors"><img src="./картинки/бренды лого/1246.png" alt="Логотип партнера 1246" class="max-h-16 w-full object-contain" loading="lazy" decoding="async"/></div>
-<div class="bg-white border border-border-color p-5 h-28 flex items-center justify-center hover:border-primary transition-colors"><img src="./картинки/бренды лого/1247.png" alt="Логотип партнера 1247" class="max-h-16 w-full object-contain" loading="lazy" decoding="async"/></div>
-<div class="bg-white border border-border-color p-5 h-28 flex items-center justify-center hover:border-primary transition-colors"><img src="./картинки/бренды лого/1248.png" alt="Логотип партнера 1248" class="max-h-16 w-full object-contain" loading="lazy" decoding="async"/></div>
-<div class="bg-white border border-border-color p-5 h-28 flex items-center justify-center hover:border-primary transition-colors"><img src="./картинки/бренды лого/1253.jpg" alt="Логотип партнера 1253" class="max-h-16 w-full object-contain" loading="lazy" decoding="async"/></div>
-<div class="bg-white border border-border-color p-5 h-28 flex items-center justify-center hover:border-primary transition-colors"><img src="./картинки/бренды лого/1258.png" alt="Логотип партнера 1258" class="max-h-16 w-full object-contain" loading="lazy" decoding="async"/></div>
-<div class="bg-white border border-border-color p-5 h-28 flex items-center justify-center hover:border-primary transition-colors"><img src="./картинки/бренды лого/1261.png" alt="Логотип партнера 1261" class="max-h-16 w-full object-contain" loading="lazy" decoding="async"/></div>
-<div class="bg-white border border-border-color p-5 h-28 flex items-center justify-center hover:border-primary transition-colors"><img src="./картинки/бренды лого/1264.png" alt="Логотип партнера 1264" class="max-h-16 w-full object-contain" loading="lazy" decoding="async"/></div>
-<div class="bg-white border border-border-color p-5 h-28 flex items-center justify-center hover:border-primary transition-colors"><img src="./картинки/бренды лого/1452.jpg" alt="Логотип партнера 1452" class="max-h-16 w-full object-contain" loading="lazy" decoding="async"/></div>
-<div class="bg-white border border-border-color p-5 h-28 flex items-center justify-center hover:border-primary transition-colors"><img src="./картинки/бренды лого/1510.jpg" alt="Логотип партнера 1510" class="max-h-16 w-full object-contain" loading="lazy" decoding="async"/></div>
-<div class="bg-white border border-border-color p-5 h-28 flex items-center justify-center hover:border-primary transition-colors"><img src="./картинки/бренды лого/1805.jpg" alt="Логотип партнера 1805" class="max-h-16 w-full object-contain" loading="lazy" decoding="async"/></div>
+<div class="flex flex-col gap-4">
+<div class="partner-marquee">
+<div class="partner-marquee__track partner-marquee__track--right" id="partners-row-top"></div>
+</div>
+<div class="partner-marquee">
+<div class="partner-marquee__track partner-marquee__track--left" id="partners-row-bottom"></div>
+</div>
 </div>
 </div>
 </section>
@@ -514,22 +674,46 @@
 <section class="py-24 bg-tech-dark text-white" id="process">
 <div class="max-w-[1440px] mx-auto px-6">
 <h2 class="text-4xl font-black uppercase mb-16 text-center">Этапы реализации проекта</h2>
-<div class="relative">
-  <div class="hidden lg:block absolute left-0 right-0 top-8 h-px bg-white/20"></div>
+<div class="relative pt-8">
   <div class="grid grid-cols-1 lg:grid-cols-5 gap-6">
     <article class="process-step" data-step="0">
+      <div class="process-mini-anim" aria-hidden="true">
+        <svg viewBox="0 0 140 72" xmlns="http://www.w3.org/2000/svg" role="presentation" focusable="false">
+          <rect x="8" y="8" width="124" height="56" rx="4" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.2)"/>
+          <path class="process-mini-anim__line" d="M22 22 H52 V40 H22 Z"/>
+          <path class="process-mini-anim__line process-mini-anim__line--2" d="M62 22 H116"/>
+          <path class="process-mini-anim__line process-mini-anim__line--3" d="M62 31 H108 M62 40 H98 M22 50 H116"/>
+          <g class="process-mini-anim__pencil">
+            <rect x="0" y="0" width="22" height="4.2" rx="2"/>
+            <path d="M22 0 L28 2.1 L22 4.2 Z"/>
+          </g>
+        </svg>
+      </div>
       <div class="process-dot w-14 h-14 rounded-full bg-white/10 border border-white/20 flex items-center justify-center mx-auto mb-5">
-        <span class="material-symbols-outlined text-2xl text-primary">assignment</span>
+        <span class="text-lg font-extrabold text-primary">ТЗ</span>
       </div>
       <div class="process-card border border-white/10 p-5 text-center">
-        <h4 class="text-lg font-bold uppercase mb-2">Брифинг</h4>
-        <p class="text-tech-gray text-xs leading-relaxed">Сбор требований и технологическое проектирование.</p>
+        <h4 class="text-lg font-bold uppercase mb-2">Разработка и ТЗ</h4>
+        <p class="text-tech-gray text-xs leading-relaxed">Помощь в разработке ТЗ, бесплатный выезд на объект и проектирование под ваш формат.</p>
       </div>
     </article>
 
     <article class="process-step" data-step="1">
+      <div class="process-mini-anim" aria-hidden="true">
+        <svg viewBox="0 0 140 72" xmlns="http://www.w3.org/2000/svg" role="presentation" focusable="false">
+          <rect x="8" y="8" width="124" height="56" rx="4" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.2)"/>
+          <g class="process-mini-anim__gear">
+            <circle class="process-mini-anim__shape" cx="40" cy="36" r="11"/>
+            <path class="process-mini-anim__shape" d="M40 20 V25 M40 47 V52 M24 36 H29 M51 36 H56 M29 25 L32.5 28.5 M47.5 43.5 L51 47 M29 47 L32.5 43.5 M47.5 28.5 L51 25"/>
+          </g>
+          <path class="process-mini-anim__shape" d="M70 24 H116 M70 34 H108 M70 44 H98"/>
+          <circle class="process-mini-anim__dot" cx="63" cy="24" r="2.3"/>
+          <circle class="process-mini-anim__dot" cx="63" cy="34" r="2.3" style="animation-delay: .25s;"/>
+          <circle class="process-mini-anim__dot" cx="63" cy="44" r="2.3" style="animation-delay: .5s;"/>
+        </svg>
+      </div>
       <div class="process-dot w-14 h-14 rounded-full bg-white/10 border border-white/20 flex items-center justify-center mx-auto mb-5">
-        <span class="material-symbols-outlined text-2xl text-primary">tune</span>
+        <span class="text-lg font-extrabold text-primary">П</span>
       </div>
       <div class="process-card border border-white/10 p-5 text-center">
         <h4 class="text-lg font-bold uppercase mb-2">Подбор</h4>
@@ -538,8 +722,18 @@
     </article>
 
     <article class="process-step" data-step="2">
+      <div class="process-mini-anim" aria-hidden="true">
+        <svg viewBox="0 0 140 72" xmlns="http://www.w3.org/2000/svg" role="presentation" focusable="false">
+          <rect x="8" y="8" width="124" height="56" rx="4" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.2)"/>
+          <rect x="20" y="22" width="100" height="9" rx="2" fill="rgba(255,255,255,0.1)"/>
+          <rect x="20" y="36" width="100" height="9" rx="2" fill="rgba(255,255,255,0.1)"/>
+          <rect class="process-mini-anim__fill" x="20" y="22" width="100" height="9" rx="2"/>
+          <rect class="process-mini-anim__fill" x="20" y="36" width="100" height="9" rx="2" style="animation-delay: .4s;"/>
+          <path class="process-mini-anim__shape" d="M22 54 H118"/>
+        </svg>
+      </div>
       <div class="process-dot w-14 h-14 rounded-full bg-white/10 border border-white/20 flex items-center justify-center mx-auto mb-5">
-        <span class="material-symbols-outlined text-2xl text-primary">checklist</span>
+        <span class="text-lg font-extrabold text-primary">₽</span>
       </div>
       <div class="process-card border border-white/10 p-5 text-center">
         <h4 class="text-lg font-bold uppercase mb-2">Смета</h4>
@@ -548,8 +742,20 @@
     </article>
 
     <article class="process-step" data-step="3">
+      <div class="process-mini-anim" aria-hidden="true">
+        <svg viewBox="0 0 140 72" xmlns="http://www.w3.org/2000/svg" role="presentation" focusable="false">
+          <rect x="8" y="8" width="124" height="56" rx="4" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.2)"/>
+          <path class="process-mini-anim__shape" d="M16 50 H126"/>
+          <g class="process-mini-anim__truck">
+            <rect x="10" y="34" width="30" height="12" rx="2" fill="rgba(255,255,255,0.86)"/>
+            <rect x="40" y="38" width="13" height="8" rx="1.5" fill="rgba(255,255,255,0.72)"/>
+            <circle cx="20" cy="49" r="3" fill="rgba(255,255,255,0.95)"/>
+            <circle cx="45" cy="49" r="3" fill="rgba(255,255,255,0.95)"/>
+          </g>
+        </svg>
+      </div>
       <div class="process-dot w-14 h-14 rounded-full bg-white/10 border border-white/20 flex items-center justify-center mx-auto mb-5">
-        <span class="material-symbols-outlined text-2xl text-primary">local_shipping</span>
+        <span class="text-lg font-extrabold text-primary">Д</span>
       </div>
       <div class="process-card border border-white/10 p-5 text-center">
         <h4 class="text-lg font-bold uppercase mb-2">Поставка</h4>
@@ -558,8 +764,17 @@
     </article>
 
     <article class="process-step" data-step="4">
+      <div class="process-mini-anim" aria-hidden="true">
+        <svg viewBox="0 0 140 72" xmlns="http://www.w3.org/2000/svg" role="presentation" focusable="false">
+          <rect x="8" y="8" width="124" height="56" rx="4" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.2)"/>
+          <path class="process-mini-anim__shape" d="M24 48 L54 18 M82 18 L112 48"/>
+          <g class="process-mini-anim__wrench">
+            <path d="M66 22 C63 25,63 30,66 33 L58 41 L61 44 L69 36 C72 39,77 39,80 36 C82 34,83 31,83 28 L79 31 L76 28 L79 24 C76 21,70 20,66 22 Z" fill="rgba(255,255,255,0.9)"/>
+          </g>
+        </svg>
+      </div>
       <div class="process-dot w-14 h-14 rounded-full bg-white/10 border border-white/20 flex items-center justify-center mx-auto mb-5">
-        <span class="material-symbols-outlined text-2xl text-primary">handyman</span>
+        <span class="text-lg font-extrabold text-primary">М</span>
       </div>
       <div class="process-card border border-white/10 p-5 text-center">
         <h4 class="text-lg font-bold uppercase mb-2">Монтаж</h4>
@@ -1112,6 +1327,69 @@
     initCatalogAutoSlider('catalog-neutral-image', 5000);
     initCatalogAutoSlider('catalog-aggregates-image', 5000);
     initCatalogAutoSlider('catalog-shocker-image', 5000);
+  })();
+
+  (function () {
+    const topRow = document.getElementById('partners-row-top');
+    const bottomRow = document.getElementById('partners-row-bottom');
+    if (!topRow || !bottomRow) return;
+
+    const logosListPath = './картинки/бренды лого/equip_logos_all/links.txt';
+    const logosBasePath = './картинки/бренды лого/equip_logos_all/';
+
+    function buildRow(rowEl, items) {
+      if (!items.length) return;
+
+      const doubled = items.concat(items);
+      doubled.forEach((fileName) => {
+        const card = document.createElement('div');
+        card.className = 'partner-logo';
+
+        const img = document.createElement('img');
+        img.src = logosBasePath + fileName;
+        img.alt = 'Логотип бренда ' + fileName.replace(/\.[^.]+$/, '');
+        img.loading = 'lazy';
+        img.decoding = 'async';
+
+        card.appendChild(img);
+        rowEl.appendChild(card);
+      });
+
+      const speedBase = Math.max(30, items.length * 1.25);
+      rowEl.style.setProperty('--marquee-duration', speedBase + 's');
+    }
+
+    fetch(logosListPath)
+      .then((response) => {
+        if (!response.ok) throw new Error('Не удалось загрузить список логотипов');
+        return response.text();
+      })
+      .then((text) => {
+        const fileNames = Array.from(
+          new Set(
+            text
+              .split('\n')
+              .map((line) => line.trim())
+              .filter(Boolean)
+              .map((url) => {
+                const noQuery = url.split('?')[0];
+                return noQuery.substring(noQuery.lastIndexOf('/') + 1);
+              })
+          )
+        );
+
+        if (!fileNames.length) return;
+
+        const half = Math.ceil(fileNames.length / 2);
+        const topItems = fileNames.slice(0, half);
+        const bottomItems = fileNames.slice(half);
+
+        buildRow(topRow, topItems);
+        buildRow(bottomRow, bottomItems.length ? bottomItems : topItems);
+      })
+      .catch(() => {
+        // Без списка оставляем блок пустым, чтобы не ломать страницу.
+      });
   })();
 </script>
 </body></html>
