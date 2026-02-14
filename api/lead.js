@@ -174,19 +174,24 @@ async function sendLeadEmail(lead) {
     <p style="font-size:12px;color:#666;">Источник: сайт Новый мир</p>
   `;
 
+  const payload = {
+    from: fromEmail,
+    to: [toEmail],
+    subject: `Новая заявка: ${lead.projectType}`,
+    html,
+  };
+
+  if (lead.email) {
+    payload.replyTo = lead.email;
+  }
+
   const result = await fetch('https://api.resend.com/emails', {
     method: 'POST',
     headers: {
       Authorization: `Bearer ${resendApiKey}`,
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({
-      from: fromEmail,
-      to: [toEmail],
-      subject: `Новая заявка: ${lead.projectType}`,
-      html,
-      reply_to: lead.email || undefined,
-    }),
+    body: JSON.stringify(payload),
   });
 
   if (!result.ok) {
