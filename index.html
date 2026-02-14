@@ -775,9 +775,11 @@
 </div>
 <div class="modern-card p-8 flex flex-col h-full group">
 <img
-  class="w-48 h-48 rounded-lg object-cover mb-6 border border-border-color mx-auto"
-  src="./картинки/Нейтральное/Снимок экрана 2026-02-09 в 14.04.20.png"
+  id="catalog-dishes-image"
+  class="w-48 h-48 rounded-lg object-cover mb-6 border border-border-color mx-auto transition-opacity duration-500"
+  src="./картинки/Посуда/9hq.webp"
   alt="Посуда"
+  data-images="./картинки/Посуда/9hq.webp|./картинки/Посуда/45345.webp|./картинки/Посуда/7050379074.jpg|./картинки/Посуда/кукму.webp|./картинки/Посуда/https---complexbar.ru-images-blog-58-menu_Gastroemkosti.jpeg.webp|./картинки/Посуда/i.webp"
 />
 <h3 class="text-xl font-bold uppercase mb-4">Посуда</h3>
 <p class="text-tech-gray text-sm mb-8 flex-grow">Профессиональная посуда и инвентарь для кухни и сервиса: прочные, практичные и износостойкие решения.</p>
@@ -1535,6 +1537,7 @@
     initCatalogAutoSlider('catalog-neutral-image', 5000);
     initCatalogAutoSlider('catalog-aggregates-image', 5000);
     initCatalogAutoSlider('catalog-shocker-image', 5000);
+    initCatalogAutoSlider('catalog-dishes-image', 5000);
   })();
 
   (function () {
