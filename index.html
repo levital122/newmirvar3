@@ -13,6 +13,9 @@
                 extend: {
                     colors: {
                         "primary": "#007BFF",
+                        "primary-700": "#005FCC",
+                        "tech-slate": "#3E4A59",
+                        "tech-muted": "#8A94A6",
                         "tech-dark": "#1A1D21",
                         "tech-gray": "#6C757D",
                         "tech-light": "#F8F9FA",
@@ -24,7 +27,13 @@
                     borderRadius: {
                         "none": "0px",
                         "sm": "2px",
-                        "DEFAULT": "0px"
+                        "DEFAULT": "12px",
+                        "xl": "18px",
+                        "2xl": "24px"
+                    },
+                    boxShadow: {
+                        "soft": "0 10px 30px rgba(15, 23, 42, 0.08)",
+                        "soft-lg": "0 18px 45px rgba(15, 23, 42, 0.14)"
                     }
                 },
             },
@@ -33,6 +42,61 @@
 <style type="text/tailwindcss">
         @layer base {
             body { @apply bg-white text-tech-dark antialiased; }
+        }
+        .btn-primary {
+            @apply bg-primary text-white hover:bg-primary-700 transition-all duration-300 shadow-soft;
+        }
+        .btn-outline {
+            @apply bg-white border border-border-color text-tech-dark hover:bg-tech-light transition-all duration-300;
+        }
+        .modern-card {
+            @apply border border-border-color bg-white rounded-xl shadow-soft transition-all duration-300;
+        }
+        .modern-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 16px 38px rgba(15, 23, 42, 0.14);
+            border-color: rgba(0, 123, 255, 0.45);
+        }
+        .hero-gradient {
+            background:
+                radial-gradient(1200px 420px at 16% 10%, rgba(0, 123, 255, 0.09), rgba(0, 123, 255, 0) 58%),
+                linear-gradient(120deg, rgba(248, 249, 250, 1) 0%, rgba(255, 255, 255, 1) 100%);
+        }
+        .hero-media-overlay {
+            background: linear-gradient(to top, rgba(26, 29, 33, 0.42) 0%, rgba(26, 29, 33, 0.06) 55%, rgba(26, 29, 33, 0.18) 100%);
+        }
+        .mobile-drawer {
+            transform: translateX(100%);
+            transition: transform 0.28s ease;
+        }
+        .mobile-drawer.is-open {
+            transform: translateX(0);
+        }
+        .mobile-overlay {
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.28s ease;
+        }
+        .mobile-overlay.is-open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .faq-answer {
+            display: grid;
+            grid-template-rows: 0fr;
+            transition: grid-template-rows 0.28s ease;
+        }
+        .faq-answer > div {
+            overflow: hidden;
+        }
+        .faq-item.is-open .faq-answer {
+            grid-template-rows: 1fr;
+        }
+        .faq-item .faq-icon {
+            transition: transform 0.25s ease;
+        }
+        .faq-item.is-open .faq-icon {
+            transform: rotate(180deg);
         }
         .step-line::after { display: none; }
         .process-step {
@@ -370,6 +434,14 @@
                 transform: translate3d(-4px, -145px, 0) scale(1.22);
             }
         }
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
     </style>
 </head>
 <body class="font-sans">
@@ -378,10 +450,10 @@
 <div class="max-w-[1440px] mx-auto px-6 h-20 flex items-center justify-between">
 <div class="flex items-center gap-12">
 <a class="flex items-center gap-2" href="/">
-<div class="w-8 h-8 bg-primary flex items-center justify-center">
+<div class="w-8 h-8 bg-primary rounded-md flex items-center justify-center shadow-soft">
 <span class="material-symbols-outlined text-white text-xl">account_tree</span>
 </div>
-<span class="text-xl font-bold tracking-tighter uppercase">Новый мир</span>
+<span class="text-xl font-extrabold tracking-tight">Новый мир</span>
 </a>
 <nav class="hidden lg:flex items-center gap-8">
 <a class="text-sm font-medium hover:text-primary transition-colors" href="#about">О нас</a>
@@ -398,18 +470,43 @@
 </div>
 <a
   href="#request"
-  class="bg-primary text-white px-6 py-3 text-xs font-bold uppercase tracking-widest hover:bg-blue-700 transition-all"
+  class="btn-primary px-6 py-3 text-xs font-bold tracking-[0.12em] rounded-lg"
 >
   Получить расчет
 </a>
+<button id="mobile-menu-open" type="button" class="lg:hidden w-11 h-11 border border-border-color rounded-lg bg-white inline-flex items-center justify-center" aria-label="Открыть меню">
+  <span class="material-symbols-outlined text-tech-dark">menu</span>
+</button>
 </div>
 </div>
 </header>
+<div id="mobile-menu-overlay" class="mobile-overlay fixed inset-0 z-[60] bg-black/35"></div>
+<aside id="mobile-menu" class="mobile-drawer fixed top-0 right-0 h-full w-[86%] max-w-sm z-[70] bg-white border-l border-border-color p-6">
+  <div class="flex items-center justify-between mb-8">
+    <div class="flex items-center gap-2">
+      <div class="w-8 h-8 bg-primary rounded-md flex items-center justify-center shadow-soft">
+        <span class="material-symbols-outlined text-white text-xl">account_tree</span>
+      </div>
+      <span class="text-lg font-extrabold">Новый мир</span>
+    </div>
+    <button id="mobile-menu-close" type="button" class="w-10 h-10 rounded-lg border border-border-color inline-flex items-center justify-center" aria-label="Закрыть меню">
+      <span class="material-symbols-outlined">close</span>
+    </button>
+  </div>
+  <nav class="flex flex-col gap-3 text-sm font-semibold">
+    <a class="px-3 py-3 rounded-lg hover:bg-tech-light" href="#about">О нас</a>
+    <a class="px-3 py-3 rounded-lg hover:bg-tech-light" href="#categories">Категории</a>
+    <a class="px-3 py-3 rounded-lg hover:bg-tech-light" href="#gallery">Галерея</a>
+    <a class="px-3 py-3 rounded-lg hover:bg-tech-light" href="#process">Как работаем</a>
+    <a class="px-3 py-3 rounded-lg hover:bg-tech-light" href="#faq">FAQ</a>
+    <a class="btn-primary px-4 py-3 rounded-lg text-center mt-2" href="#request">Получить расчет</a>
+  </nav>
+</aside>
 <main>
-<section class="relative bg-tech-light border-b border-border-color overflow-hidden">
+<section class="relative hero-gradient border-b border-border-color overflow-hidden">
 <div class="max-w-[1440px] mx-auto flex flex-col lg:flex-row items-stretch min-h-[600px]">
 <div class="lg:w-1/2 p-12 lg:p-24 flex flex-col justify-center gap-8">
-<div class="inline-flex items-center gap-2 px-3 py-1 bg-white border border-border-color w-fit">
+<div class="inline-flex items-center gap-2 px-3 py-1 bg-white border border-border-color rounded-full w-fit shadow-soft">
 <span class="w-2 h-2 bg-primary animate-pulse"></span>
 <span class="text-[10px] font-bold uppercase tracking-[0.2em] text-tech-gray">Промышленный стандарт 2024</span>
 </div>
@@ -422,16 +519,30 @@
 <div class="flex flex-wrap gap-4">
   <a
     href="#categories"
-    class="bg-primary text-white px-10 py-5 text-sm font-bold uppercase tracking-widest hover:shadow-xl transition-all inline-flex items-center justify-center"
+    class="btn-primary px-10 py-5 text-sm font-bold tracking-[0.12em] rounded-lg inline-flex items-center justify-center"
   >
     Смотреть каталог
   </a>
   <a
     href="#request"
-    class="bg-white border border-border-color text-tech-dark px-10 py-5 text-sm font-bold uppercase tracking-widest hover:bg-tech-light transition-all inline-flex items-center justify-center"
+    class="btn-outline px-10 py-5 text-sm font-bold tracking-[0.12em] rounded-lg inline-flex items-center justify-center"
   >
     Оставить заявку
   </a>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
+  <div class="modern-card p-4">
+    <div class="text-2xl font-black text-primary">12+ лет</div>
+    <p class="text-xs text-tech-gray mt-1">Опыт в HoReCa</p>
+  </div>
+  <div class="modern-card p-4">
+    <div class="text-2xl font-black text-primary">1000+</div>
+    <p class="text-xs text-tech-gray mt-1">Проектов по РФ</p>
+  </div>
+  <div class="modern-card p-4">
+    <div class="text-2xl font-black text-primary">24/7</div>
+    <p class="text-xs text-tech-gray mt-1">Сервис и поддержка</p>
+  </div>
 </div>
 </div>
 <div class="lg:w-1/2 relative bg-gray-200">
@@ -445,7 +556,7 @@
   ></div>
 
   <!-- overlay: тон + стрелки -->
-  <div class="absolute inset-0 bg-primary/10 mix-blend-multiply pointer-events-none"></div>
+  <div class="absolute inset-0 hero-media-overlay pointer-events-none"></div>
 
   <button
     type="button"
@@ -531,120 +642,152 @@
 <a class="text-sm font-bold uppercase tracking-widest border-b-2 border-primary pb-1" href="#">Весь ассортимент</a>
 </div>
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-<div class="border border-border-color p-8 flex flex-col h-full group hover:border-primary transition-all">
+<div class="modern-card p-8 flex flex-col h-full group">
 <img
   id="catalog-thermal-image"
-  class="w-48 h-48 object-cover mb-6 border border-border-color mx-auto transition-opacity duration-500"
+  class="w-48 h-48 rounded-lg object-cover mb-6 border border-border-color mx-auto transition-opacity duration-500"
   src="./картинки/Тепловое оборудование/Снимок экрана 2026-02-09 в 13.42.44.png"
   alt="Тепловое оборудование"
   data-images="./картинки/Тепловое оборудование/Снимок экрана 2026-02-09 в 13.42.44.png|./картинки/Тепловое оборудование/Снимок экрана 2026-02-09 в 13.42.56.png|./картинки/Тепловое оборудование/Снимок экрана 2026-02-09 в 13.43.02.png|./картинки/Тепловое оборудование/Снимок экрана 2026-02-09 в 13.43.09.png|./картинки/Тепловое оборудование/Снимок экрана 2026-02-09 в 13.43.21.png"
 />
 <h3 class="text-xl font-bold uppercase mb-4">Тепловое</h3>
 <p class="text-tech-gray text-sm mb-8 flex-grow">Пароконвектоматы, плиты, печи и жарочные поверхности от ведущих заводов.</p>
+<div class="flex flex-wrap gap-2 mb-6">
+  <span class="text-[10px] px-2.5 py-1 rounded-full bg-blue-50 text-primary font-semibold">Гарантия 12 мес</span>
+  <span class="text-[10px] px-2.5 py-1 rounded-full bg-gray-100 text-tech-slate font-semibold">Поставка от 7 дней</span>
+</div>
 <a
   href="#request"
-  class="w-full py-4 text-xs font-bold uppercase tracking-widest border border-tech-dark group-hover:bg-tech-dark group-hover:text-white transition-all inline-flex items-center justify-center"
+  class="w-full py-4 text-xs font-bold tracking-[0.12em] border border-tech-dark rounded-lg group-hover:bg-tech-dark group-hover:text-white transition-all inline-flex items-center justify-center"
 >Запросить подбор</a>
 </div>
-<div class="border border-border-color p-8 flex flex-col h-full group hover:border-primary transition-all">
+<div class="modern-card p-8 flex flex-col h-full group">
 <img
   id="catalog-cold-image"
-  class="w-48 h-48 object-cover mb-6 border border-border-color mx-auto transition-opacity duration-500"
+  class="w-48 h-48 rounded-lg object-cover mb-6 border border-border-color mx-auto transition-opacity duration-500"
   src="./картинки/Холодильное/Снимок экрана 2026-02-09 в 13.55.58.png"
   alt="Холодильное оборудование"
   data-images="./картинки/Холодильное/Снимок экрана 2026-02-09 в 13.55.58.png|./картинки/Холодильное/Снимок экрана 2026-02-09 в 13.56.17.png|./картинки/Холодильное/Снимок экрана 2026-02-09 в 13.56.54.png|./картинки/Холодильное/Снимок экрана 2026-02-09 в 13.57.15.png"
 />
 <h3 class="text-xl font-bold uppercase mb-4">Холодильное</h3>
 <p class="text-tech-gray text-sm mb-8 flex-grow">Шкафы шоковой заморозки, витрины, камеры и столы с точным контролем температуры.</p>
+<div class="flex flex-wrap gap-2 mb-6">
+  <span class="text-[10px] px-2.5 py-1 rounded-full bg-blue-50 text-primary font-semibold">Темп. контроль</span>
+  <span class="text-[10px] px-2.5 py-1 rounded-full bg-gray-100 text-tech-slate font-semibold">Сервис 24/7</span>
+</div>
 <a
   href="#request"
-  class="w-full py-4 text-xs font-bold uppercase tracking-widest border border-tech-dark group-hover:bg-tech-dark group-hover:text-white transition-all inline-flex items-center justify-center"
+  class="w-full py-4 text-xs font-bold tracking-[0.12em] border border-tech-dark rounded-lg group-hover:bg-tech-dark group-hover:text-white transition-all inline-flex items-center justify-center"
 >Запросить подбор</a>
 </div>
-<div class="border border-border-color p-8 flex flex-col h-full group hover:border-primary transition-all">
+<div class="modern-card p-8 flex flex-col h-full group">
 <img
   id="catalog-electro-image"
-  class="w-48 h-48 object-cover mb-6 border border-border-color mx-auto transition-opacity duration-500"
+  class="w-48 h-48 rounded-lg object-cover mb-6 border border-border-color mx-auto transition-opacity duration-500"
   src="./картинки/Электро-механическое/Снимок экрана 2026-02-09 в 14.01.22.png"
   alt="Электро-механическое оборудование"
   data-images="./картинки/Электро-механическое/Снимок экрана 2026-02-09 в 14.01.22.png|./картинки/Электро-механическое/Снимок экрана 2026-02-09 в 14.01.41.png|./картинки/Электро-механическое/Снимок экрана 2026-02-09 в 14.02.21.png|./картинки/Электро-механическое/Снимок экрана 2026-02-09 в 14.02.39.png|./картинки/Электро-механическое/Снимок экрана 2026-02-09 в 14.02.49.png"
 />
 <h3 class="text-xl font-bold uppercase mb-4">Электро-механическое</h3>
 <p class="text-tech-gray text-sm mb-8 flex-grow">Овощерезки, миксеры, мясорубки и слайсеры для автоматизации кухни.</p>
+<div class="flex flex-wrap gap-2 mb-6">
+  <span class="text-[10px] px-2.5 py-1 rounded-full bg-blue-50 text-primary font-semibold">Автоматизация</span>
+  <span class="text-[10px] px-2.5 py-1 rounded-full bg-gray-100 text-tech-slate font-semibold">Подбор под бюджет</span>
+</div>
 <a
   href="#request"
-  class="w-full py-4 text-xs font-bold uppercase tracking-widest border border-tech-dark group-hover:bg-tech-dark group-hover:text-white transition-all inline-flex items-center justify-center"
+  class="w-full py-4 text-xs font-bold tracking-[0.12em] border border-tech-dark rounded-lg group-hover:bg-tech-dark group-hover:text-white transition-all inline-flex items-center justify-center"
 >Запросить подбор</a>
 </div>
-<div class="border border-border-color p-8 flex flex-col h-full group hover:border-primary transition-all">
+<div class="modern-card p-8 flex flex-col h-full group">
 <img
   id="catalog-neutral-image"
-  class="w-48 h-48 object-cover mb-6 border border-border-color mx-auto transition-opacity duration-500"
+  class="w-48 h-48 rounded-lg object-cover mb-6 border border-border-color mx-auto transition-opacity duration-500"
   src="./картинки/neutral-equipment/Снимок экрана 2026-02-09 в 14.03.45.png"
   alt="Нейтральное оборудование"
   data-images="./картинки/neutral-equipment/Снимок экрана 2026-02-09 в 14.03.45.png|./картинки/neutral-equipment/Снимок экрана 2026-02-09 в 14.04.02.png|./картинки/neutral-equipment/Снимок экрана 2026-02-09 в 14.04.20.png|./картинки/neutral-equipment/Снимок экрана 2026-02-09 в 14.04.46.png"
 />
 <h3 class="text-xl font-bold uppercase mb-4">Нейтральное</h3>
 <p class="text-tech-gray text-sm mb-8 flex-grow">Столы, мойки, стеллажи и вытяжные зонты из нержавеющей стали AISI 304.</p>
+<div class="flex flex-wrap gap-2 mb-6">
+  <span class="text-[10px] px-2.5 py-1 rounded-full bg-blue-50 text-primary font-semibold">AISI 304</span>
+  <span class="text-[10px] px-2.5 py-1 rounded-full bg-gray-100 text-tech-slate font-semibold">Под заказ</span>
+</div>
 <a
   href="#request"
-  class="w-full py-4 text-xs font-bold uppercase tracking-widest border border-tech-dark group-hover:bg-tech-dark group-hover:text-white transition-all inline-flex items-center justify-center"
+  class="w-full py-4 text-xs font-bold tracking-[0.12em] border border-tech-dark rounded-lg group-hover:bg-tech-dark group-hover:text-white transition-all inline-flex items-center justify-center"
 >Запросить подбор</a>
 </div>
-<div class="border border-border-color p-8 flex flex-col h-full group hover:border-primary transition-all">
+<div class="modern-card p-8 flex flex-col h-full group">
 <img
   id="catalog-aggregates-image"
-  class="w-48 h-48 object-cover mb-6 border border-border-color mx-auto transition-opacity duration-500"
+  class="w-48 h-48 rounded-lg object-cover mb-6 border border-border-color mx-auto transition-opacity duration-500"
   src="./картинки/Агрегаты/i-6.webp"
   alt="Агрегаты"
   data-images="./картинки/Агрегаты/i-6.webp|./картинки/Агрегаты/i-7.webp|./картинки/Агрегаты/i-8.webp|./картинки/Агрегаты/i-9.webp"
 />
 <h3 class="text-xl font-bold uppercase mb-4">Агрегаты</h3>
 <p class="text-tech-gray text-sm mb-8 flex-grow">Промышленные агрегаты и узлы для стабильной работы кухонных линий и технологических зон.</p>
+<div class="flex flex-wrap gap-2 mb-6">
+  <span class="text-[10px] px-2.5 py-1 rounded-full bg-blue-50 text-primary font-semibold">Пром. серия</span>
+  <span class="text-[10px] px-2.5 py-1 rounded-full bg-gray-100 text-tech-slate font-semibold">Склад в РФ</span>
+</div>
 <a
   href="#request"
-  class="w-full py-4 text-xs font-bold uppercase tracking-widest border border-tech-dark group-hover:bg-tech-dark group-hover:text-white transition-all inline-flex items-center justify-center"
+  class="w-full py-4 text-xs font-bold tracking-[0.12em] border border-tech-dark rounded-lg group-hover:bg-tech-dark group-hover:text-white transition-all inline-flex items-center justify-center"
 >Запросить подбор</a>
 </div>
-<div class="border border-border-color p-8 flex flex-col h-full group hover:border-primary transition-all">
+<div class="modern-card p-8 flex flex-col h-full group">
 <img
   id="catalog-shocker-image"
-  class="w-48 h-48 object-cover mb-6 border border-border-color mx-auto transition-opacity duration-500"
+  class="w-48 h-48 rounded-lg object-cover mb-6 border border-border-color mx-auto transition-opacity duration-500"
   src="./картинки/Шокер/i-6.webp"
   alt="Шокеры"
   data-images="./картинки/Шокер/i-6.webp|./картинки/Шокер/i-7.webp|./картинки/Шокер/i-8.webp|./картинки/Шокер/i-9.webp|./картинки/Шокер/i-10.webp|./картинки/Шокер/i-11.webp|./картинки/Шокер/i-12.webp"
 />
 <h3 class="text-xl font-bold uppercase mb-4">Шокеры</h3>
 <p class="text-tech-gray text-sm mb-8 flex-grow">Шоковые охладители и морозильные решения для быстрого охлаждения продукции без потери качества.</p>
+<div class="flex flex-wrap gap-2 mb-6">
+  <span class="text-[10px] px-2.5 py-1 rounded-full bg-blue-50 text-primary font-semibold">HACCP ready</span>
+  <span class="text-[10px] px-2.5 py-1 rounded-full bg-gray-100 text-tech-slate font-semibold">Монтаж под ключ</span>
+</div>
 <a
   href="#request"
-  class="w-full py-4 text-xs font-bold uppercase tracking-widest border border-tech-dark group-hover:bg-tech-dark group-hover:text-white transition-all inline-flex items-center justify-center"
+  class="w-full py-4 text-xs font-bold tracking-[0.12em] border border-tech-dark rounded-lg group-hover:bg-tech-dark group-hover:text-white transition-all inline-flex items-center justify-center"
 >Запросить подбор</a>
 </div>
-<div class="border border-border-color p-8 flex flex-col h-full group hover:border-primary transition-all">
+<div class="modern-card p-8 flex flex-col h-full group">
 <img
-  class="w-48 h-48 object-cover mb-6 border border-border-color mx-auto"
+  class="w-48 h-48 rounded-lg object-cover mb-6 border border-border-color mx-auto"
   src="./картинки/Холодильное/Снимок экрана 2026-02-09 в 13.57.15.png"
   alt="Холодильные камеры"
 />
 <h3 class="text-xl font-bold uppercase mb-4">Холодильные камеры</h3>
 <p class="text-tech-gray text-sm mb-8 flex-grow">Сборные и моноблочные камеры для хранения сырья и готовой продукции с точным температурным режимом.</p>
+<div class="flex flex-wrap gap-2 mb-6">
+  <span class="text-[10px] px-2.5 py-1 rounded-full bg-blue-50 text-primary font-semibold">Моноблок / Сплит</span>
+  <span class="text-[10px] px-2.5 py-1 rounded-full bg-gray-100 text-tech-slate font-semibold">От -30°С</span>
+</div>
 <a
   href="#request"
-  class="w-full py-4 text-xs font-bold uppercase tracking-widest border border-tech-dark group-hover:bg-tech-dark group-hover:text-white transition-all inline-flex items-center justify-center"
+  class="w-full py-4 text-xs font-bold tracking-[0.12em] border border-tech-dark rounded-lg group-hover:bg-tech-dark group-hover:text-white transition-all inline-flex items-center justify-center"
 >Запросить подбор</a>
 </div>
-<div class="border border-border-color p-8 flex flex-col h-full group hover:border-primary transition-all">
+<div class="modern-card p-8 flex flex-col h-full group">
 <img
-  class="w-48 h-48 object-cover mb-6 border border-border-color mx-auto"
+  class="w-48 h-48 rounded-lg object-cover mb-6 border border-border-color mx-auto"
   src="./картинки/Нейтральное/Снимок экрана 2026-02-09 в 14.04.20.png"
   alt="Посуда"
 />
 <h3 class="text-xl font-bold uppercase mb-4">Посуда</h3>
 <p class="text-tech-gray text-sm mb-8 flex-grow">Профессиональная посуда и инвентарь для кухни и сервиса: прочные, практичные и износостойкие решения.</p>
+<div class="flex flex-wrap gap-2 mb-6">
+  <span class="text-[10px] px-2.5 py-1 rounded-full bg-blue-50 text-primary font-semibold">Износостойко</span>
+  <span class="text-[10px] px-2.5 py-1 rounded-full bg-gray-100 text-tech-slate font-semibold">Для проф. кухни</span>
+</div>
 <a
   href="#request"
-  class="w-full py-4 text-xs font-bold uppercase tracking-widest border border-tech-dark group-hover:bg-tech-dark group-hover:text-white transition-all inline-flex items-center justify-center"
+  class="w-full py-4 text-xs font-bold tracking-[0.12em] border border-tech-dark rounded-lg group-hover:bg-tech-dark group-hover:text-white transition-all inline-flex items-center justify-center"
 >Запросить подбор</a>
 </div>
 </div>
@@ -843,32 +986,33 @@
 <div class="max-w-[800px] mx-auto px-6">
 <h2 class="text-4xl font-black uppercase mb-12 text-center">Часто задаваемые вопросы</h2>
 <div class="flex flex-col gap-4">
-<div class="bg-white border border-border-color">
-<button class="w-full flex items-center justify-between p-6 text-left hover:bg-gray-50 transition-colors">
+<div class="faq-item bg-white border border-border-color is-open">
+<button class="faq-toggle w-full flex items-center justify-between p-6 text-left hover:bg-gray-50 transition-colors" type="button" aria-expanded="true">
 <span class="font-bold uppercase text-sm tracking-tight">Предоставляете ли вы гарантию на монтаж?</span>
-<span class="material-symbols-outlined text-primary">expand_more</span>
+<span class="faq-icon material-symbols-outlined text-primary">expand_more</span>
 </button>
-<div class="px-6 pb-6 text-sm text-tech-gray leading-relaxed border-t border-border-color pt-4">
-                                Да, на все монтажные работы мы предоставляем расширенную гарантию 12 месяцев, помимо заводской гарантии на оборудование.
-                            </div>
+<div class="faq-answer"><div class="px-6 pb-6 text-sm text-tech-gray leading-relaxed border-t border-border-color pt-4">Да, на все монтажные работы мы предоставляем расширенную гарантию 12 месяцев, помимо заводской гарантии на оборудование.</div></div>
 </div>
-<div class="bg-white border border-border-color">
-<button class="w-full flex items-center justify-between p-6 text-left hover:bg-gray-50 transition-colors">
+<div class="faq-item bg-white border border-border-color">
+<button class="faq-toggle w-full flex items-center justify-between p-6 text-left hover:bg-gray-50 transition-colors" type="button" aria-expanded="false">
 <span class="font-bold uppercase text-sm tracking-tight">Возможно ли приобрести оборудование в лизинг?</span>
-<span class="material-symbols-outlined text-primary">expand_more</span>
+<span class="faq-icon material-symbols-outlined text-primary">expand_more</span>
 </button>
+<div class="faq-answer"><div class="px-6 pb-6 text-sm text-tech-gray leading-relaxed border-t border-border-color pt-4">Да, работаем с лизинговыми программами партнерских банков. Подберем график платежей под финансовую модель вашего проекта.</div></div>
 </div>
-<div class="bg-white border border-border-color">
-<button class="w-full flex items-center justify-between p-6 text-left hover:bg-gray-50 transition-colors">
+<div class="faq-item bg-white border border-border-color">
+<button class="faq-toggle w-full flex items-center justify-between p-6 text-left hover:bg-gray-50 transition-colors" type="button" aria-expanded="false">
 <span class="font-bold uppercase text-sm tracking-tight">Работаете ли вы с НДС?</span>
-<span class="material-symbols-outlined text-primary">expand_more</span>
+<span class="faq-icon material-symbols-outlined text-primary">expand_more</span>
 </button>
+<div class="faq-answer"><div class="px-6 pb-6 text-sm text-tech-gray leading-relaxed border-t border-border-color pt-4">Да, работаем с НДС и предоставляем полный комплект закрывающих документов для бухгалтерии и юридического отдела.</div></div>
 </div>
-<div class="bg-white border border-border-color">
-<button class="w-full flex items-center justify-between p-6 text-left hover:bg-gray-50 transition-colors">
+<div class="faq-item bg-white border border-border-color">
+<button class="faq-toggle w-full flex items-center justify-between p-6 text-left hover:bg-gray-50 transition-colors" type="button" aria-expanded="false">
 <span class="font-bold uppercase text-sm tracking-tight">Какие сроки поставки оборудования в регионы?</span>
-<span class="material-symbols-outlined text-primary">expand_more</span>
+<span class="faq-icon material-symbols-outlined text-primary">expand_more</span>
 </button>
+<div class="faq-answer"><div class="px-6 pb-6 text-sm text-tech-gray leading-relaxed border-t border-border-color pt-4">Средний срок поставки — от 3 до 14 дней, в зависимости от региона и наличия на складе. По каждому проекту фиксируем график поставок в договоре.</div></div>
 </div>
 </div>
 </div>
@@ -967,6 +1111,11 @@
 <button class="bg-primary text-white py-5 text-sm font-bold uppercase tracking-widest hover:bg-blue-700 transition-all shadow-lg mt-4">
                                 Отправить данные
                             </button>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-2 mt-1">
+  <div class="text-[10px] text-tech-gray border border-border-color rounded-lg px-2.5 py-2 text-center">Ответ за 15 минут</div>
+  <div class="text-[10px] text-tech-gray border border-border-color rounded-lg px-2.5 py-2 text-center">Смета за 24 часа</div>
+  <div class="text-[10px] text-tech-gray border border-border-color rounded-lg px-2.5 py-2 text-center">Без спама</div>
+</div>
 <p class="text-[10px] text-tech-gray leading-tight">Нажимая кнопку, вы соглашаетесь с Политикой конфиденциальности и обработки персональных данных.</p>
 </form>
 </div>
@@ -978,21 +1127,21 @@
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16">
 <div class="flex flex-col gap-6">
 <a class="flex items-center gap-2" href="/">
-<div class="w-6 h-6 bg-primary flex items-center justify-center">
-<span class="material-symbols-outlined text-white text-base">account_tree</span>
+<div class="w-8 h-8 bg-primary rounded-md flex items-center justify-center shadow-soft">
+<span class="material-symbols-outlined text-white text-xl">account_tree</span>
 </div>
-<span class="text-lg font-bold tracking-tighter uppercase">Новый мир</span>
+<span class="text-lg font-extrabold tracking-tight">Новый мир</span>
 </a>
 <p class="text-tech-gray text-xs leading-relaxed max-w-xs">
                             Профессиональное инженерное бюро и поставщик оборудования для сегмента HoReCa. Решения любой сложности с гарантией результата.
                         </p>
 <div class="flex gap-4">
-<div class="w-8 h-8 border border-white/10 flex items-center justify-center hover:bg-primary transition-colors cursor-pointer">
+<a href="#" class="w-8 h-8 border border-white/10 rounded-md flex items-center justify-center hover:bg-primary transition-colors" aria-label="Поделиться">
 <span class="material-symbols-outlined text-sm">share</span>
-</div>
-<div class="w-8 h-8 border border-white/10 flex items-center justify-center hover:bg-primary transition-colors cursor-pointer">
+</a>
+<a href="#" class="w-8 h-8 border border-white/10 rounded-md flex items-center justify-center hover:bg-primary transition-colors" aria-label="Новости">
 <span class="material-symbols-outlined text-sm">rss_feed</span>
-</div>
+</a>
 </div>
 </div>
 <div>
@@ -1026,12 +1175,19 @@
 <div class="mt-20 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4">
 <p class="text-[10px] text-tech-gray uppercase tracking-widest">© 2012-2024 ООО «Новый мир». Все права защищены.</p>
 <div class="flex gap-8">
-<span class="text-[10px] text-tech-gray uppercase tracking-widest cursor-pointer hover:text-white">Тех. поддержка</span>
-<span class="text-[10px] text-tech-gray uppercase tracking-widest cursor-pointer hover:text-white">Карта сайта</span>
+<a href="#" class="text-[10px] text-tech-gray uppercase tracking-widest hover:text-white">Тех. поддержка</a>
+<a href="#" class="text-[10px] text-tech-gray uppercase tracking-widest hover:text-white">Карта сайта</a>
 </div>
 </div>
 </div>
 </footer>
+</div>
+
+<div class="fixed bottom-4 inset-x-4 z-[55] lg:hidden">
+  <div class="bg-white/95 backdrop-blur border border-border-color rounded-2xl shadow-soft-lg p-2.5 grid grid-cols-2 gap-2">
+    <a href="tel:+79372840841" class="btn-outline rounded-xl py-3 text-xs font-bold text-center">Позвонить</a>
+    <a href="#request" class="btn-primary rounded-xl py-3 text-xs font-bold text-center">Оставить заявку</a>
+  </div>
 </div>
 
 <div id="gallery-lightbox" class="gallery-lightbox" aria-hidden="true" role="dialog" aria-label="Просмотр изображения">
@@ -1039,6 +1195,58 @@
 </div>
 
 <script>
+  (function () {
+    const openBtn = document.getElementById('mobile-menu-open');
+    const closeBtn = document.getElementById('mobile-menu-close');
+    const menu = document.getElementById('mobile-menu');
+    const overlay = document.getElementById('mobile-menu-overlay');
+    if (!openBtn || !closeBtn || !menu || !overlay) return;
+
+    const open = () => {
+      menu.classList.add('is-open');
+      overlay.classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+    };
+
+    const close = () => {
+      menu.classList.remove('is-open');
+      overlay.classList.remove('is-open');
+      document.body.style.overflow = '';
+    };
+
+    openBtn.addEventListener('click', open);
+    closeBtn.addEventListener('click', close);
+    overlay.addEventListener('click', close);
+    menu.querySelectorAll('a[href^="#"]').forEach((link) => link.addEventListener('click', close));
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') close();
+    });
+  })();
+
+  (function () {
+    const items = Array.from(document.querySelectorAll('.faq-item'));
+    if (!items.length) return;
+
+    items.forEach((item) => {
+      const btn = item.querySelector('.faq-toggle');
+      if (!btn) return;
+
+      btn.addEventListener('click', () => {
+        const isOpen = item.classList.contains('is-open');
+        items.forEach((el) => {
+          el.classList.remove('is-open');
+          const b = el.querySelector('.faq-toggle');
+          b && b.setAttribute('aria-expanded', 'false');
+        });
+
+        if (!isOpen) {
+          item.classList.add('is-open');
+          btn.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+  })();
+
   (function () {
     /**
      * Мини-карусель без зависимостей.
